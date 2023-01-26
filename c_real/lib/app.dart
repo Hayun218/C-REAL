@@ -14,26 +14,34 @@
 
 // import 'package:flutter/material.dart';
 
-// import 'home.dart';
-// import 'login.dart';
-// import 'profile.dart';
+
+import 'consumer.dart';
+import 'home.dart';
+import 'login.dart';
+import 'profile.dart';
+import 'community.dart';
+
 
 // class CReal extends StatelessWidget {
 //   const CReal({Key? key}) : super(key: key);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'C:REAL',
-//       home: HomePage(),
-//       initialRoute: '/login',
-//       routes: {
-//         '/profile': (context) => MyProfile(),
-//         '/home': (context) => HomePage(),
-//       },
-//       onGenerateRoute: _getRoute,
-//     );
-//   }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'C:REAL',
+      home: HomePage(),
+      initialRoute: '/home',
+      routes: {
+        '/profile': (context) => MyProfile(),
+        '/home': (context) => HomePage(),
+        '/login': (context) => LoginPage(),
+        '/community': (context) => ComPage(),
+      },
+      onGenerateRoute: _getRoute,
+    );
+  }
+
 
 //   Route<dynamic>? _getRoute(RouteSettings settings) {
 //     if (settings.name != '/login') {
