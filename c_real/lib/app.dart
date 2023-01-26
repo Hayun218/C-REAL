@@ -24,7 +24,7 @@ class CReal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Final',
+      title: 'C:REAL',
       home: HomePage(),
       initialRoute: '/login',
       routes: {
