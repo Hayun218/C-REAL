@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'consumer.dart';
-
 // 자영업자
 
 int pageChanged = 2;
@@ -58,6 +56,7 @@ class _MyProfileState extends State<MyProfile> {
               const SizedBox(height: 30),
               Text("name"),
               const SizedBox(height: 30),
+              Text("별점 보여주기!"),
               FlatButton(
                 onPressed: () =>
                     null, //Navigator.pushNamed(context, '/order_c'),
@@ -72,28 +71,18 @@ class _MyProfileState extends State<MyProfile> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   FlatButton(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => OrderedCheck()),
-                    ),
-                    child: Text("주문내역"),
+                    onPressed: () => Navigator.pushNamed(context, '/order_f'),
+                    child: Text("판매현"),
                   ),
                   FlatButton(
                     onPressed: () =>
                         null, //Navigator.pushNamed(context, '/ask_c'),
-                    child: Text("1:1 문의내역"),
+                    child: Text("문의사항"),
                   ),
                   FlatButton(
                     onPressed: () =>
                         null, //Navigator.pushNamed(context, '/deliver_c'),
                     child: Text("주문배송조회"),
-                  ),
-                  FlatButton(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => FavoritePage()),
-                    ),
-                    child: Text("즐겨찾기 관리"),
                   ),
                 ],
               ),
