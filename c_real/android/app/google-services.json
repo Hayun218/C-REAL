@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "969441320766",
+    "project_id": "c-real-b35c8",
+    "storage_bucket": "c-real-b35c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969441320766:android:91d53f4a13d767ec59966f",
+        "android_client_info": {
+          "package_name": "lydia.c_real"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "969441320766-qko646tgveqfovhefb0e21sk24cnmlqp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTDlVjLIvFK9SJmkc5yIkjB-XGn2dLV7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "969441320766-qko646tgveqfovhefb0e21sk24cnmlqp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
