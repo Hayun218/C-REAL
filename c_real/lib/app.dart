@@ -28,7 +28,7 @@ class CReal extends StatelessWidget {
     return MaterialApp(
       title: 'C:REAL',
       home: HomePage(),
-      initialRoute: '/login',
+      initialRoute: '/home',
       routes: {
         '/profile': (context) => MyProfile(),
         '/home': (context) => HomePage(),

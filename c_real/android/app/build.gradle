@@ -26,7 +26,9 @@ apply plugin: 'com.google.gms.google-services'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
+
     compileSdkVersion 33
+
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -38,6 +40,7 @@ android {
         applicationId "lydia.c_real"
         minSdkVersion 19
         targetSdkVersion 33
+
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
