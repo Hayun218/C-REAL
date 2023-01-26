@@ -14,9 +14,11 @@
 
 import 'package:flutter/material.dart';
 
+import 'consumer.dart';
 import 'home.dart';
 import 'login.dart';
 import 'profile.dart';
+import 'community.dart';
 
 class CReal extends StatelessWidget {
   const CReal({Key? key}) : super(key: key);
@@ -30,6 +32,8 @@ class CReal extends StatelessWidget {
       routes: {
         '/profile': (context) => MyProfile(),
         '/home': (context) => HomePage(),
+        '/login': (context) => LoginPage(),
+        '/community': (context) => ComPage(),
       },
       onGenerateRoute: _getRoute,
     );

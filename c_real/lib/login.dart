@@ -4,14 +4,16 @@ class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => LoginPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(),
+    return Container(
+      child: Scaffold(
+        backgroundColor: Colors.blueGrey,
+      ),
     );
   }
 }
