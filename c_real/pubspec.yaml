@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.18.4 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -37,6 +37,13 @@ dependencies:
   google_fonts: ^3.0.1
   provider: ^6.0.5
   cloud_firestore: ^4.3.1
+  firebase_core: ^2.4.1
+  firebase_auth: ^4.2.5
+  get: ^4.6.5
+  firebase_ui_auth: ^1.1.9
+  firebase_ui_firestore: ^1.2.3
+  auth: ^8.2.0
+  get_storage: ^2.0.3
 
 dev_dependencies:
   flutter_test:
@@ -64,8 +71,8 @@ flutter:
     - assets/images/55205930.jpg
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+     - asset/splashlogo.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
