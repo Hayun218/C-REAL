@@ -12,8 +12,7 @@
 // // See the License for the specific language governing permissions and
 // // limitations under the License.
 
-// import 'package:flutter/material.dart';
-
+import 'package:flutter/material.dart';
 
 import 'consumer.dart';
 import 'home.dart';
@@ -21,10 +20,8 @@ import 'login.dart';
 import 'profile.dart';
 import 'community.dart';
 
-
-// class CReal extends StatelessWidget {
-//   const CReal({Key? key}) : super(key: key);
-
+class CReal extends StatelessWidget {
+  const CReal({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,23 +32,22 @@ import 'community.dart';
       routes: {
         '/profile': (context) => MyProfile(),
         '/home': (context) => HomePage(),
-        '/login': (context) => LoginPage(),
+        // '/login': (context) => LoginPage(),
         '/community': (context) => ComPage(),
       },
       onGenerateRoute: _getRoute,
     );
   }
 
+  Route<dynamic>? _getRoute(RouteSettings settings) {
+    if (settings.name != '/login') {
+      return null;
+    }
 
-//   Route<dynamic>? _getRoute(RouteSettings settings) {
-//     if (settings.name != '/login') {
-//       return null;
-//     }
-
-//     return MaterialPageRoute<void>(
-//       settings: settings,
-//       builder: (BuildContext context) => LoginPage(),
-//       fullscreenDialog: true,
-//     );
-//   }
-// }
+    return MaterialPageRoute<void>(
+      settings: settings,
+      builder: (BuildContext context) => HomePage(),
+      fullscreenDialog: true,
+    );
+  }
+}

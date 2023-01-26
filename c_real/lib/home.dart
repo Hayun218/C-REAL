@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'font.dart';
+import 'theme.dart';
 
 class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
+  const HomePage({Key? key}) : super(key: key);
 
-class _HomePageState extends State<HomePage> {
   @override
   HomePageState createState() => HomePageState();
 }
