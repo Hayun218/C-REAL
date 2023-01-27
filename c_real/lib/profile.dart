@@ -72,10 +72,12 @@ class _MyProfileState extends State<MyProfile> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   TextButton(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => OrderedCheck()),
-                    ),
+                    onPressed: () {
+                    //   Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => OrderedCheck()),
+                    // );
+                    } ,
                     child: Text("주문내역"),
                   ),
                   TextButton(

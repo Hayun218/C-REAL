@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'consumer.dart';
 import 'theme.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 int pageChanged = 0;
 
@@ -16,82 +17,240 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
   bool _isSearchActivated = false;
   late TabController _tabController;
 
+  Widget _home() {
+    return Padding(
+      padding:
+          const EdgeInsets.only(top: 15.0, left: 8.0, right: 8.0, bottom: 5.0),
+      child: StreamBuilder<QuerySnapshot>(
+          // stream: FirebaseFirestore.instance.collectionGroup('Posts').orderBy('timeStamp', descending: true).snapshots(),
+          stream: FirebaseFirestore.instance
+              .collectionGroup('posts')
+              .orderBy('timeStamp', descending: true)
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            }
+            return Container(
+                height: 400,
+                
+
+                child: Scrollbar(
+                    child: GridView.builder(
+                  itemCount: snapshot.data?.docs.length,
+                  itemBuilder: ((context, index) => Container(
+                      padding: const EdgeInsets.only(
+                          top: 8.0, left: 8.0, right: 8.0),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0)),
+                      clipBehavior: Clip.antiAlias,
+                        child: InkWell(
+                          
+                          onTap: () => Get.to(() => HomeDetailPage(
+                                pageInfo: "",
+                                titleStr: snapshot.data!.docs[index]['title'],
+                                explainStr: snapshot.data!.docs[index]['explain'],
+                                imgURL: snapshot.data!.docs[index]['firstPicUrl'],
+                                keyValue: snapshot.data!.docs[index]['key'],
+                                heart: snapshot.data!.docs[index]['like'],
+                                exchange : snapshot.data!.docs[index]['exchange'],
+                                left : snapshot.data!.docs[index]['left'],
+                                price : snapshot.data!.docs[index]['price'],
+                                weight : snapshot.data!.docs[index]['weight'],
+                                where : snapshot.data!.docs[index]['wherefrom'],
+                                wrap : snapshot.data!.docs[index]['wraptype'],
+                              )),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Material(
+                                color: Colors.transparent,
+                                child: AspectRatio(
+                                  aspectRatio: 18.0 / 11.0,
+                                  child: Image.asset("assets/images/55205930.jpg"),
+                                ),
+                              ),
+                              Text(
+                                snapshot.data!.docs[index]['title'],
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              Text(snapshot.data!.docs[index]['authorName'],
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 10,
+                                  )),
+                              Divider(color: Colors.black),
+                            ],
+                          ),
+                        ),
+                      ))), gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+      ),
+                )));
+          }),
+    );
+  }
+  Widget _home1() {
+    return Padding(
+      padding:
+          const EdgeInsets.only(top: 15.0, left: 8.0, right: 8.0, bottom: 5.0),
+      child: StreamBuilder<QuerySnapshot>(
+          // stream: FirebaseFirestore.instance.collectionGroup('Posts').orderBy('timeStamp', descending: true).snapshots(),
+          stream: FirebaseFirestore.instance
+              .collectionGroup('postsa')
+              .orderBy('timeStamp', descending: true)
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            }
+            return Container(
+                height: 400,
+                
+
+                child: Scrollbar(
+                    child: GridView.builder(
+                  itemCount: snapshot.data?.docs.length,
+                  itemBuilder: ((context, index) => Container(
+                      padding: const EdgeInsets.only(
+                          top: 8.0, left: 8.0, right: 8.0),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0)),
+                      clipBehavior: Clip.antiAlias,
+                        child: InkWell(
+                          
+                          onTap: () => Get.to(() => HomeDetailPage(
+                                pageInfo: "",
+                                titleStr: snapshot.data!.docs[index]['title'],
+                                explainStr: snapshot.data!.docs[index]['explain'],
+                                imgURL: snapshot.data!.docs[index]['firstPicUrl'],
+                                keyValue: snapshot.data!.docs[index]['key'],
+                                heart: snapshot.data!.docs[index]['like'],
+                                exchange : snapshot.data!.docs[index]['exchange'],
+                                left : snapshot.data!.docs[index]['left'],
+                                price : snapshot.data!.docs[index]['price'],
+                                weight : snapshot.data!.docs[index]['weight'],
+                                where : snapshot.data!.docs[index]['wherefrom'],
+                                wrap : snapshot.data!.docs[index]['wraptype'],
+                              )),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Material(
+                                color: Colors.transparent,
+                                child: AspectRatio(
+                                  aspectRatio: 18.0 / 11.0,
+                                  child: Image.asset("assets/images/55205930.jpg"),
+                                ),
+                              ),
+                              Text(
+                                snapshot.data!.docs[index]['title'],
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              Text(snapshot.data!.docs[index]['authorName'],
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 10,
+                                  )),
+                              Divider(color: Colors.black),
+                            ],
+                          ),
+                        ),
+                      ))), gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+      ),
+                )));
+          }),
+    );
+  }
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
   }
 
-  List<Widget> _buildGridCards(int count) {
-    List<Widget> cards = List.generate(
-      count,
-      (int index) {
-        return InkWell(
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => HomeDetailPage(
-                  product: fruitProductList[index],
-                ),
-              ),
-            );
-          },
-          child: Card(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0)),
-            clipBehavior: Clip.antiAlias,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Hero(
-                  tag: fruitProductList[index].price,
-                  child: Material(
-                    color: Colors.transparent,
-                    child: AspectRatio(
-                      aspectRatio: 18.0 / 11.0,
-                      child: Image.asset("assets/images/55205930.jpg"),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        "${fruitProductList[index].title}, ${fruitProductList[index].kiloWeight}Kg",
-                        style: NunitoProductTitle(),
-                      ),
-                      SizedBox(height: 4.0),
-                      Text('${fruitProductList[index].price}원',
-                          style: NunitoProductPrice()),
-                      SizedBox(height: 4.0),
-                      Text(
-                          '1kg당 ${fruitProductList[index].price / fruitProductList[index].kiloWeight}원',
-                          style: NunitoProductSmall()),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-    return cards;
-  }
+  // List<Widget> _buildGridCards(int count) {
+  //   List<Widget> cards = List.generate(
+  //     count,
+  //     (int index) {
+  //       return InkWell(
+  //         onTap: () {
+  //           Navigator.of(context).push(
+  //             MaterialPageRoute(
+  //               builder: (context) => HomeDetailPage(
+  //                 product: fruitProductList[index],
+  //               ),
+  //             ),
+  //           );
+  //         },
+  //         child: Card(
+  //           shape: RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.circular(20.0)),
+  //           clipBehavior: Clip.antiAlias,
+  //           child: Column(
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: <Widget>[
+  //               Hero(
+  //                 tag: fruitProductList[index].price,
+  //                 child: Material(
+  //                   color: Colors.transparent,
+  //                   child: AspectRatio(
+  //                     aspectRatio: 18.0 / 11.0,
+  //                     child: Image.asset("assets/images/55205930.jpg"),
+  //                   ),
+  //                 ),
+  //               ),
+  //               Padding(
+  //                 padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
+  //                 child: Column(
+  //                   crossAxisAlignment: CrossAxisAlignment.start,
+  //                   children: <Widget>[
+  //                     Text(
+  //                       "${fruitProductList[index].title}, ${fruitProductList[index].kiloWeight}Kg",
+  //                       style: NunitoProductTitle(),
+  //                     ),
+  //                     SizedBox(height: 4.0),
+  //                     Text('${fruitProductList[index].price}원',
+  //                         style: NunitoProductPrice()),
+  //                     SizedBox(height: 4.0),
+  //                     Text(
+  //                         '1kg당 ${fruitProductList[index].price / fruitProductList[index].kiloWeight}원',
+  //                         style: NunitoProductSmall()),
+  //                   ],
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  //   return cards;
+  // }
 
   Widget _ListViewCard(BuildContext context, int index) {
     return Card(
       child: InkWell(
         onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => HomeDetailPage(
-                product: fruitProductList[index],
-              ),
-            ),
-          );
+          // Navigator.of(context).push(
+          //   MaterialPageRoute(
+          //     builder: (context) => HomeDetailPage(
+          //       product: fruitProductList[index],
+          //     ),
+          //   ),
+          // );
         },
         child: ListTile(
           leading: Hero(
@@ -195,14 +354,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         child: DefaultTabController(length: 2, child: _tabBar)),
                         */
                     Expanded(
-                      child: GridView.count(
-                        crossAxisCount: 2,
-                        padding: const EdgeInsets.all(16.0),
-
-                        childAspectRatio: itemWidth / itemHeight,
-                        // TODO: 파이어베이스 연동해서 변수값 가져오기
-                        children: _buildGridCards(fruitProductList.length), //
-                      ),
+                      child: _home(),
                     ),
                     /*
                     Expanded(
@@ -242,6 +394,10 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         child: DefaultTabController(length: 2, child: _tabBar)),
                         */
                     Expanded(
+                      child: _home1(),
+                    ),
+                    /*
+                    Expanded(
                       child: ListView.builder(
                         padding: EdgeInsets.all(8),
                         itemCount: fruitProductList.length,
@@ -250,6 +406,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         },
                       ),
                     ),
+                    */
                   ],
                 ),
                 _isSearchActivated
@@ -263,6 +420,42 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ],
             ),
           ),
+          
+          // Container(
+          //   height: MediaQuery.of(context).size.height,
+          //   width: MediaQuery.of(context).size.width,
+          //   child: Stack(
+          //     children: [
+          //       Column(
+          //         children: [
+          //           /*
+          //           Container(
+          //               padding: const EdgeInsets.only(top: 30.0),
+          //               width: MediaQuery.of(context).size.width,
+          //               child: DefaultTabController(length: 2, child: _tabBar)),
+          //               */
+          //           Expanded(
+          //             child: ListView.builder(
+          //               padding: EdgeInsets.all(8),
+          //               itemCount: fruitProductList.length,
+          //               itemBuilder: (context, index) {
+          //                 return _ListViewCard(context, index);
+          //               },
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //       _isSearchActivated
+          //           ? TextField(
+          //               decoration: InputDecoration(
+          //                   labelText: '필요한 농산물을 검색해 보세요',
+          //                   filled: true,
+          //                   fillColor: Colors.white),
+          //             )
+          //           : Container(),
+          //     ],
+          //   ),
+          // ),
         ]));
   }
 }
