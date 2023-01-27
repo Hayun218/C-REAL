@@ -32,11 +32,3 @@ TextStyle NunitoProductPrice() {
       fontWeight: FontWeight.w700);
 }
 
-
-
-
-
-
-
-
-

@@ -122,10 +122,3 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
     );
   }
 }
-
-
-
-
-
-
-
