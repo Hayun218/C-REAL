@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -6,8 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import 'package:google_fonts/google_fonts.dart';
+
+
 import 'home.dart';
 import 'home_detail.dart';
+import 'order_list.dart';
 import 'theme.dart';
 
 class FavoritePage extends StatefulWidget {
@@ -403,6 +406,7 @@ class _OrderedCheckState extends State<OrderedCheck> {
                     ), gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2),
               ),
+
             ),
           ),
         );
@@ -453,6 +457,96 @@ class _OrderedCheckState extends State<OrderedCheck> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomAppBar(
+          child: SizedBox(
+        height: size.height / 8,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              "총 ${totalPrice}원",
+              style: NunitoProductPrice(),
+            ),
+            MaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50.0)),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: SizedBox(
+                          height: size.height / 4,
+                          child: Column(
+                            children: [
+                              Image.asset("assets/images/image16.png"),
+                              Text('일반 마트보다',
+                                  style: GoogleFonts.nunito(
+                                      fontSize: 25,
+                                      height: 30 / 25,
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.w700)),
+                              Text('총N원',
+                                  style: GoogleFonts.nunito(
+                                      color: Color(0xff9EC151),
+                                      fontSize: 25,
+                                      height: 30 / 25,
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.w700)),
+                              Text('더 저렴하게 구입해요',
+                                  style: GoogleFonts.nunito(
+                                      fontSize: 25,
+                                      height: 30 / 25,
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.w700)),
+                            ],
+                          ),
+                        ),
+                        actions: <Widget>[
+                          MaterialButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50.0)),
+                            onPressed: (() {
+                              Navigator.of(context, rootNavigator: true)
+                                  .pop('dialog');
+                              Get.toNamed('/payment-test');
+                            }),
+                            color: Color(0xff9EC151),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text(
+                                "확인했어요",
+                                style: GoogleFonts.nunito(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    height: 25 / 20,
+                                    letterSpacing: 0,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                          ),
+                        ],
+                        actionsAlignment: MainAxisAlignment.center,
+                      );
+                    });
+              },
+              color: Color(0xff9EC151),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  "구매하기 (${shoppingProductList.length})",
+                  style: GoogleFonts.nunito(
+                      color: Colors.white,
+                      fontSize: 20,
+                      height: 25 / 20,
+                      letterSpacing: 0,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+            ),
+          ],
+        ),
+      )),
     );
   }
 }

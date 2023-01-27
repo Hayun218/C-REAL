@@ -13,9 +13,6 @@ import 'like.dart';
 
 // import 'package:get/get.dart';
 
-
-
-
 class BottomScreen extends StatefulWidget {
   const BottomScreen({Key? key}) : super(key: key);
 
@@ -27,10 +24,10 @@ class BottomScreenState extends State<BottomScreen> {
   late List<Map<String, Object>> _pages;
   int _selectedPageIndex = 0;
 
-  void initState(){
-    _pages=[
+  void initState() {
+    _pages = [
       {
-        'page':HomePage(),
+        'page': HomePage(),
       },
       {
         // 'page': const LikePage(),
@@ -38,21 +35,18 @@ class BottomScreenState extends State<BottomScreen> {
 
       },
       {
-        'page':MyProfile(),
+        'page': MyProfile(),
       },
-      
     ];
     super.initState();
   }
 
-  void _selectPage(int index){
+  void _selectPage(int index) {
     setState(() {
       _selectedPageIndex = index;
     });
   }
-  
-  
-  
+
   // int _selectedIndex = 0;
   // static const TextStyle optionStyle =
   //     TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -61,9 +55,9 @@ class BottomScreenState extends State<BottomScreen> {
   //   const CategoryScreen(),
   //   LikePage(),
   //   CreatePostPage(),
-    
+
   //   // const NotificationPage(),
-    
+
   // ];
 
 // void _onItemTapped(int index) {
@@ -72,26 +66,21 @@ class BottomScreenState extends State<BottomScreen> {
 //     });
 //   }
 
-
-
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-      
+
       backgroundColor: Color.fromARGB(255, 252, 251, 251),
-      body:_pages[_selectedPageIndex]['page'] as Widget,
+      body: _pages[_selectedPageIndex]['page'] as Widget,
       bottomNavigationBar: BottomAppBar(
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.grey,
-            border: Border(
-              top: BorderSide(
+              color: Colors.grey,
+              border: Border(
+                  top: BorderSide(
                 color: Colors.grey,
                 width: 0.5,
-              )
-            )
-          ),
+              ))),
           child: BottomNavigationBar(
             onTap: _selectPage,
             selectedItemColor: Color.fromARGB(255, 17, 16, 17),
@@ -114,10 +103,8 @@ class BottomScreenState extends State<BottomScreen> {
           ),
         ),
       ),
-      // floatingActionButtonLocation: 
+      // floatingActionButtonLocation:
       //   FloatingActionButtonLocation.miniEndDocked,
-      
     );
   }
-
 }
