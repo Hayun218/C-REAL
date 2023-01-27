@@ -75,16 +75,10 @@ class BottomScreenState extends State<BottomScreen> {
   Widget build(BuildContext context) {
     
     return Scaffold(
-      appBar: AppBar(
-        title: logo(),
-        // backgroundColor: Colors.red,
-      ),
+      
       backgroundColor: Color.fromARGB(255, 252, 251, 251),
       body:_pages[_selectedPageIndex]['page'] as Widget,
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 0.01,
-        clipBehavior: Clip.antiAlias,
         child: Container(
           decoration: BoxDecoration(
             color: Colors.grey,
@@ -97,8 +91,6 @@ class BottomScreenState extends State<BottomScreen> {
           ),
           child: BottomNavigationBar(
             onTap: _selectPage,
-            backgroundColor: Theme.of(context).primaryColor,
-            unselectedItemColor: Colors.purple,
             selectedItemColor: Color.fromARGB(255, 17, 16, 17),
             selectedFontSize: 20,
             currentIndex: _selectedPageIndex,
@@ -124,7 +116,5 @@ class BottomScreenState extends State<BottomScreen> {
       
     );
   }
-  Widget logo(){
-    return Image.asset('asset/images/logo.png',height: 110,width: 110,);
-  }
+
 }
