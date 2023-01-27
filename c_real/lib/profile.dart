@@ -1,4 +1,5 @@
 
+import 'package:c_real/profile_farmer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'auth.dart';
@@ -142,7 +143,7 @@ class _MyProfileState extends State<MyProfile> {
                         Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => CreatePostPage()),),
+                          builder: (context) => FarmerProfile()),),
                       child: Text("결제수단"),
                     ),
                   ],

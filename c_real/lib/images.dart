@@ -1,61 +1,71 @@
 
 
 import 'dart:io';
+import 'package:dotted_border/dotted_border.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
-class CameraExample extends StatefulWidget {
-  const CameraExample({Key? key}) : super(key: key);
+class UploadImage extends StatefulWidget {
+  const UploadImage({Key? key}) : super(key: key);
 
   @override
-  _CameraExampleState createState() => _CameraExampleState();
+  _UploadImageState createState() => _UploadImageState();
 }
 
-class _CameraExampleState extends State<CameraExample> {
+class _UploadImageState extends State<UploadImage> {
   File? _image;
   final picker = ImagePicker();
 
-  // 비동기 처리를 통해 카메라와 갤러리에서 이미지를 가져온다.
+
   Future getImage(ImageSource imageSource) async {
     final image = await picker.pickImage(source: imageSource);
 
     setState(() {
-      _image = File(image!.path); // 가져온 이미지를 _image에 저장
+      _image = File(image!.path);
     });
   }
 
-  // 이미지를 보여주는 위젯
   Widget showImage() {
-    return Container(
-        color: const Color(0xffd0cece),
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.width,
-        child: Center(
-            child: _image == null
-                ? Text('No image selected.')
-                : Image.file(File(_image!.path))));
+    return DottedBorder(
+      child: Container(
+          color: const Color(0xffd0cece),
+          width: 400,
+          height: 300,
+          child: Center(
+              child: _image == null
+                  ? Text('No image selected.')
+                  : Image.file(File(_image!.path)))),
+    );
+  }
+
+  Future<String> _submit() async {
+    final storageRef = FirebaseStorage.instance.ref();
+
+    final mountainsRef = storageRef.child(_image!.path);
+    await mountainsRef.putFile(File(_image!.path));
+    String url = await mountainsRef.getDownloadURL();
+    return url;
   }
 
   @override
   Widget build(BuildContext context) {
-    // 화면 세로 고정
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
     return
 Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 25.0),
+            const SizedBox(height: 25.0),
             showImage(),
-            SizedBox(
-              height: 50.0,
+            const SizedBox(
+              height: 10.0,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 // 카메라 촬영 버튼
+
                 FloatingActionButton(
                   child: Icon(Icons.add_a_photo),
                   tooltip: 'pick Iamge',
@@ -64,7 +74,7 @@ Column(
                   },
                 ),
 
-                // 갤러리에서 이미지를 가져오는 버튼
+
                 FloatingActionButton(
                   child: Icon(Icons.wallpaper),
                   tooltip: 'pick Iamge',
@@ -76,6 +86,10 @@ Column(
             )
           ],
         );
+    if(_image != null){
+      String imgURL = _submit() as String;
+      print(imgURL);
+    }
   }
 }
 
