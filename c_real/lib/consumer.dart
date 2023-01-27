@@ -134,7 +134,6 @@ class _FavoritePageState extends State<FavoritePage> {
   }
 }
 
-
 //////////////////////////////////////////////////////////////////////////////////
 
 class OrderedCheck extends StatefulWidget {
@@ -300,63 +299,23 @@ class _OrderedCheckState extends State<OrderedCheck> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.check),
-                                        Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                                        Text("판매처명"),
-                                      ],
-                                    ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Material(
-                                        color: Colors.transparent,
-                                        child: SizedBox(
-                                          width: 100,
-                                          height: 100,
-                                          child: AspectRatio(
-                                            aspectRatio: 18/11,
-                                            child: Image.asset("assets/images/55205930.jpg"),
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          // Text(
-                                          //   "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}Kg",
-                                          //   style: NunitoProductTitle(),
-                                          // ),
-                                          // SizedBox(height: 4.0),
-                                          // Text('${snapshot.data!.docs[index]['price']}원',
-                                          //     style: NunitoProductPrice()),
-                                          // SizedBox(height: 4.0),
-                                          // Text(
-                                          //     '1kg당 ${snapshot.data!.docs[index]['price'] / snapshot.data!.docs[index]['weight']}원',
-                                          //     style: NunitoProductSmall()),
-                                          // Text(
-                                          //     '1kg당 ${snapshot.data!.docs[index]['price'] / snapshot.data!.docs[index]['weight']}원',
-                                          //     style: NunitoProductSmall()),
-                                          Text(
-                                            "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}Kg",
-                                            style: NunitoProductTitle(),
-                                          ),
-                                          SizedBox(height: 4.0),
-                                          Text('${snapshot.data!.docs[index]['price']}원',
-                                              style: NunitoProductPrice()),
-                                          SizedBox(height: 4.0),
-                                          Text(
-                                              '1kg당 ${int.parse(snapshot.data!.docs[index]['price']) / int.parse(snapshot.data!.docs[index]['weight'])}원',
-                                              style: NunitoProductSmall()),
-                                         
-                                        ],
-                                      ),
-                                    ],
-
+                                  // Text(
+                                  //   "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}Kg",
+                                  //   style: NunitoProductTitle(),
+                                  // ),
+                                  // SizedBox(height: 4.0),
+                                  // Text('${snapshot.data!.docs[index]['price']}원',
+                                  //     style: NunitoProductPrice()),
+                                  // SizedBox(height: 4.0),
+                                  // Text(
+                                  //     '1kg당 ${snapshot.data!.docs[index]['price'] / snapshot.data!.docs[index]['weight']}원',
+                                  //     style: NunitoProductSmall()),
+                                  // Text(
+                                  //     '1kg당 ${snapshot.data!.docs[index]['price'] / snapshot.data!.docs[index]['weight']}원',
+                                  //     style: NunitoProductSmall()),
+                                  Text(
+                                    "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}Kg",
+                                    style: NunitoProductTitle(),
                                   ),
                                   SizedBox(height: 4.0),
                                   Text(
@@ -435,13 +394,10 @@ class _OrderedCheckState extends State<OrderedCheck> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(
-              "총 33000원",
-              style: NunitoProductPrice(),
-            ),
             MaterialButton(
+              minWidth: 300,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50.0)),
+                  borderRadius: BorderRadius.circular(5.0)),
               onPressed: () {
                 showDialog(
                     context: context,
@@ -477,7 +433,7 @@ class _OrderedCheckState extends State<OrderedCheck> {
                         actions: <Widget>[
                           MaterialButton(
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0)),
+                                borderRadius: BorderRadius.circular(5.0)),
                             onPressed: (() {
                               Navigator.of(context, rootNavigator: true)
                                   .pop('dialog');
