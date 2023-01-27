@@ -58,7 +58,7 @@ class _MyProfileState extends State<MyProfile> {
               const SizedBox(height: 30),
               Text("name"),
               const SizedBox(height: 30),
-              FlatButton(
+              TextButton(
                 onPressed: () =>
                     null, //Navigator.pushNamed(context, '/order_c'),
                 child: Text("내 정보 관리"),
@@ -71,24 +71,24 @@ class _MyProfileState extends State<MyProfile> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  FlatButton(
+                  TextButton(
                     onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => OrderedCheck()),
                     ),
                     child: Text("주문내역"),
                   ),
-                  FlatButton(
+                  TextButton(
                     onPressed: () =>
                         null, //Navigator.pushNamed(context, '/ask_c'),
                     child: Text("1:1 문의내역"),
                   ),
-                  FlatButton(
+                  TextButton(
                     onPressed: () =>
                         null, //Navigator.pushNamed(context, '/deliver_c'),
                     child: Text("주문배송조회"),
                   ),
-                  FlatButton(
+                  TextButton(
                     onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => FavoritePage()),

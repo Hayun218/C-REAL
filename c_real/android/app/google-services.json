@@ -29,6 +29,13 @@
             {
               "client_id": "969441320766-qko646tgveqfovhefb0e21sk24cnmlqp.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "969441320766-lrsbjkhgvtul2ihrt2r8q429apkosl2a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "lydia.c-real"
+              }
             }
           ]
         }
