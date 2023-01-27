@@ -300,23 +300,63 @@ class _OrderedCheckState extends State<OrderedCheck> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  // Text(
-                                  //   "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}Kg",
-                                  //   style: NunitoProductTitle(),
-                                  // ),
-                                  // SizedBox(height: 4.0),
-                                  // Text('${snapshot.data!.docs[index]['price']}원',
-                                  //     style: NunitoProductPrice()),
-                                  // SizedBox(height: 4.0),
-                                  // Text(
-                                  //     '1kg당 ${snapshot.data!.docs[index]['price'] / snapshot.data!.docs[index]['weight']}원',
-                                  //     style: NunitoProductSmall()),
-                                  // Text(
-                                  //     '1kg당 ${snapshot.data!.docs[index]['price'] / snapshot.data!.docs[index]['weight']}원',
-                                  //     style: NunitoProductSmall()),
-                                  Text(
-                                    "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}Kg",
-                                    style: NunitoProductTitle(),
+                                  Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.check),
+                                        Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                                        Text("판매처명"),
+                                      ],
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Material(
+                                        color: Colors.transparent,
+                                        child: SizedBox(
+                                          width: 100,
+                                          height: 100,
+                                          child: AspectRatio(
+                                            aspectRatio: 18/11,
+                                            child: Image.asset("assets/images/55205930.jpg"),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          // Text(
+                                          //   "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}Kg",
+                                          //   style: NunitoProductTitle(),
+                                          // ),
+                                          // SizedBox(height: 4.0),
+                                          // Text('${snapshot.data!.docs[index]['price']}원',
+                                          //     style: NunitoProductPrice()),
+                                          // SizedBox(height: 4.0),
+                                          // Text(
+                                          //     '1kg당 ${snapshot.data!.docs[index]['price'] / snapshot.data!.docs[index]['weight']}원',
+                                          //     style: NunitoProductSmall()),
+                                          // Text(
+                                          //     '1kg당 ${snapshot.data!.docs[index]['price'] / snapshot.data!.docs[index]['weight']}원',
+                                          //     style: NunitoProductSmall()),
+                                          Text(
+                                            "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}Kg",
+                                            style: NunitoProductTitle(),
+                                          ),
+                                          SizedBox(height: 4.0),
+                                          Text('${snapshot.data!.docs[index]['price']}원',
+                                              style: NunitoProductPrice()),
+                                          SizedBox(height: 4.0),
+                                          Text(
+                                              '1kg당 ${int.parse(snapshot.data!.docs[index]['price']) / int.parse(snapshot.data!.docs[index]['weight'])}원',
+                                              style: NunitoProductSmall()),
+                                         
+                                        ],
+                                      ),
+                                    ],
+
                                   ),
                                   SizedBox(height: 4.0),
                                   Text(

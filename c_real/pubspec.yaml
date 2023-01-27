@@ -78,7 +78,23 @@ flutter:
     - assets/images/55205930.jpg
     - asset/splashlogo.png
     - assets/images/image16.png
+    - asset/농부.png
+    - asset/자영업ㅈ.png
+    - asset/클릭된거.png
+    - asset/클릭안된거.png
+    - asset/logo4x.png
+    - asset/집회색4x.png
+    - asset/집4x.png
+    - asset/상점4x.png
+    - asset/상점회색4x.png
+    - asset/카트4x.png
+    - asset/카트회색4x.png
+    - asset/사람4x.png
+    - asset/사람회색4x.png
+    - asset/하트4x.png
+    - asset/하트회색4x.png
     - assets/images/Group151.png
+
 
   #   - images/a_dot_ham.jpeg
 

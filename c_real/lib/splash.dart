@@ -1,4 +1,5 @@
 
+import 'package:c_real/select.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,8 +15,8 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Timer(Duration(seconds: 3), () {
-      Get.offAll(() => App());
+    Timer(Duration(seconds: 5), () {
+      Get.offAll(() => Select());
     });
     super.initState();
   }
@@ -28,10 +29,12 @@ class _SplashScreenState extends State<SplashScreen> {
       alignment: Alignment.center,
       children: [
         Container(
-          color: Color.fromARGB(255, 131, 16, 53),
-          child: Center(child: Text("Loading...")),
+          color: Color.fromARGB(255, 158, 193, 81),
+          child: Center(child:                     
+          Image.asset('asset/logo4x.png',width: 201,height: 200,)
+),
         ),
-        CircularProgressIndicator()
+        // CircularProgressIndicator()
       ],
     ));
   }
