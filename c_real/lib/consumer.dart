@@ -1,4 +1,5 @@
-import 'dart:js_util';
+
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 
@@ -117,6 +118,16 @@ class _FavoritePageState extends State<FavoritePage> {
               ],
             ),
           ],
+        ),
+      ),
+      body: Container(
+        child: TextButton(
+          onPressed: FirebaseAuth.instance.signOut,
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.white,
+            primary: Color.fromARGB(255, 27, 26, 26),
+          ),
+          child: const Text("로그아웃"),
         ),
       ),
     );

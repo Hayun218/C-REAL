@@ -5,8 +5,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:flutter/src/foundation/key.dart';
+import 'bottom.dart';
 
-import 'home.dart';
 
 class App extends StatelessWidget {
   App({super.key});
@@ -70,7 +70,9 @@ class App extends StatelessWidget {
             "userID": FirebaseAuth.instance.currentUser?.email,
             // "Name": FirebaseAuth.instance.currentUser?.displayName,
           });
-          return HomePage();
+
+          return BottomScreen();
+
         }
       },
     );
