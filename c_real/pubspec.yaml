@@ -49,6 +49,7 @@ dependencies:
   flutterfire_ui: ^0.4.3+20
   fluttertoast: ^8.1.2
   liquid_progress_indicator: ^0.4.0
+  iamport_flutter: ^0.10.7
 
 dev_dependencies:
   flutter_test:
