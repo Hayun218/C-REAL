@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:intl/intl.dart';
 
 import 'home.dart';
 import 'home_detail.dart';
@@ -20,139 +20,91 @@ class FavoritePage extends StatefulWidget {
 
 class _FavoritePageState extends State<FavoritePage> {
   Widget _like() {
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = size.height / 3;
+    final double itemWidth = size.width / 2;
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance
-          .collection("Users")
-          .doc(FirebaseAuth.instance.currentUser?.email)
-          .collection("Like")
-          .orderBy("timeStamp", descending: false)
-          .snapshots(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
-        }
-        return Padding(
-          padding: const EdgeInsets.only(top: 0,left: 20,right: 20),
-          child: Container(
-                  height: 630   ,
-                
-            decoration: BoxDecoration(
-              
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    border: Border.all(
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                    ),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(13))
-                                        
-                  ),
-            child: Scrollbar(
-              child: GridView.builder(
-                itemCount: snapshot.data!.docs.length,
+        stream: FirebaseFirestore.instance
+            .collection("Users")
+            .doc(FirebaseAuth.instance.currentUser?.email)
+            .collection("Like")
+            .orderBy("timeStamp", descending: false)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          }
+          return Container(
+              height: 400,
+              child: Scrollbar(
+                  child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: itemWidth / itemHeight,
+                ),
+                itemCount: snapshot.data?.docs.length,
                 itemBuilder: ((context, index) => Container(
-                      padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-                      child: InkWell(
-                            onTap: () => Get.to(() => HomeDetailPage(
-                              pageInfo: "",
-                              titleStr: snapshot.data!.docs[index]['title'],
-                              explainStr: snapshot.data!.docs[index]['explain'],
-                              imgURL: snapshot.data!.docs[index]['firstPicUrl'],
-                              keyValue: snapshot.data!.docs[index]['key'],
-                              heart: snapshot.data!.docs[index]['like'],
-                              exchange : snapshot.data!.docs[index]['exchange'],
-                              left : snapshot.data!.docs[index]['left'],
-                              price : snapshot.data!.docs[index]['price'],
-                              weight : snapshot.data!.docs[index]['weight'],
-                              where : snapshot.data!.docs[index]['wherefrom'],
-                              wrap : snapshot.data!.docs[index]['wraptype'],
-                            ),),
-                      
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0)),
-                              clipBehavior: Clip.antiAlias,
+                    padding:
+                        const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+                    child: InkWell(
+                      onTap: () => Get.to(() => HomeDetailPage(
+                            pageInfo: "",
+                            titleStr: snapshot.data!.docs[index]['title'],
+                            explainStr: snapshot.data!.docs[index]['explain'],
+                            imgURL: snapshot.data!.docs[index]['firstPicUrl'],
+                            keyValue: snapshot.data!.docs[index]['key'],
+                            heart: snapshot.data!.docs[index]['like'],
+                            exchange: snapshot.data!.docs[index]['exchange'],
+                            left: snapshot.data!.docs[index]['left'],
+                            price: snapshot.data!.docs[index]['price'],
+                            weight: snapshot.data!.docs[index]['weight'],
+                            where: snapshot.data!.docs[index]['wherefrom'],
+                            wrap: snapshot.data!.docs[index]['wraptype'],
+                          )),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0)),
+                        clipBehavior: Clip.antiAlias,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Material(
+                              color: Colors.transparent,
+                              child: AspectRatio(
+                                aspectRatio: 18.0 / 11.0,
+                                child:
+                                    Image.asset("assets/images/55205930.jpg"),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                  16.0, 12.0, 16.0, 8.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.check),
-                                        Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                                        Text("판매처명"),
-                                      ],
-                                    ),
+                                children: [
+                                  Text(
+                                    "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}kg",
+                                    style: NunitoProductTitle(),
                                   ),
-                                  Row(
-                                    children: [
-                                      Material(
-                                        color: Colors.transparent,
-                                        child: SizedBox(
-                                          width: 100,
-                                          height: 100,
-                                          child: AspectRatio(
-                                            aspectRatio: 18/11,
-                                            child: Image.asset("assets/images/55205930.jpg"),
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          // Text(
-                                          //   "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}Kg",
-                                          //   style: NunitoProductTitle(),
-                                          // ),
-                                          // SizedBox(height: 4.0),
-                                          // Text('${snapshot.data!.docs[index]['price']}원',
-                                          //     style: NunitoProductPrice()),
-                                          // SizedBox(height: 4.0),
-                                          // Text(
-                                          //     '1kg당 ${snapshot.data!.docs[index]['price'] / snapshot.data!.docs[index]['weight']}원',
-                                          //     style: NunitoProductSmall()),
-                                          // Text(
-                                          //     '1kg당 ${snapshot.data!.docs[index]['price'] / snapshot.data!.docs[index]['weight']}원',
-                                          //     style: NunitoProductSmall()),
-                                          Text(
-                                            "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}Kg",
-                                            style: NunitoProductTitle(),
-                                          ),
-                                          SizedBox(height: 4.0),
-                                          Text('${snapshot.data!.docs[index]['price']}원',
-                                              style: NunitoProductPrice()),
-                                          SizedBox(height: 4.0),
-                                          
-                                          Text(
-                                              '1kg당 ${int.parse(snapshot.data!.docs[index]['price']) / int.parse(snapshot.data!.docs[index]['weight'])}원',
-                                              style: NunitoProductSmall()),
-                                         
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  Divider(
-                                    height: 300,
-                                    thickness: 2,
-                                  ),
-                                  Text("data"),
+                                  SizedBox(height: 4.0),
+                                  Text(
+                                      "${snapshot.data!.docs[index]['price']}원",
+                                      style: NunitoProductPrice()),
+                                  SizedBox(height: 4.0),
+                                  Text(
+                                      '1kg당 ${NumberFormat("###.#", "en_US").format(int.parse(snapshot.data!.docs[index]['price']) / int.parse(snapshot.data!.docs[index]['weight']))}원',
+                                      style: NunitoProductSmall()),
                                 ],
                               ),
                             ),
-                          ),
-                      
-                    )
-                    ), gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2),
-              ),
-            ),
-          ),
-        );
-      },
-    );
+                          ],
+                        ),
+                      ),
+                    ))),
+              )));
+        });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -172,9 +124,7 @@ class _FavoritePageState extends State<FavoritePage> {
           children: [
             Column(
               children: [
-                Expanded(
-                  child: _like()
-                ),
+                Expanded(child: _like()),
               ],
             ),
           ],
@@ -185,13 +135,7 @@ class _FavoritePageState extends State<FavoritePage> {
 }
 
 
-
 //////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
 
 class OrderedCheck extends StatefulWidget {
   @override
@@ -279,7 +223,10 @@ class _OrderedCheckState extends State<OrderedCheck> {
   //   return cards;
   // }
 
-   Widget _basket() {
+  Widget _basket() {
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = size.height / 8;
+    final double itemWidth = size.width / 2;
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection("Users")
@@ -291,47 +238,66 @@ class _OrderedCheckState extends State<OrderedCheck> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
         }
-        return Padding(
-          padding: const EdgeInsets.only(top: 0,left: 20,right: 20),
-          child: Container(
-                  height: 630   ,
-                
-            decoration: BoxDecoration(
-              
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    border: Border.all(
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                    ),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(13))
-                                        
-                  ),
-            child: Scrollbar(
-              child: GridView.builder(
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: ((context, index) => Container(
-                      padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-                      child: InkWell(
-                            onTap: () => Get.to(() => HomeDetailPage(
-                              pageInfo: "",
-                              titleStr: snapshot.data!.docs[index]['title'],
-                              explainStr: snapshot.data!.docs[index]['explain'],
-                              imgURL: snapshot.data!.docs[index]['firstPicUrl'],
-                              keyValue: snapshot.data!.docs[index]['key'],
-                              heart: snapshot.data!.docs[index]['like'],
-                              exchange : snapshot.data!.docs[index]['exchange'],
-                              left : snapshot.data!.docs[index]['left'],
-                              price : snapshot.data!.docs[index]['price'],
-                              weight : snapshot.data!.docs[index]['weight'],
-                              where : snapshot.data!.docs[index]['wherefrom'],
-                              wrap : snapshot.data!.docs[index]['wraptype'],
-                            ),),
-                      
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0)),
-                              clipBehavior: Clip.antiAlias,
-                              child: Column(
+        return Scrollbar(
+          child: GridView.builder(
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: ((context, index) => Container(
+                  padding:
+                      const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+                  child: InkWell(
+                    onTap: () => Get.to(
+                      () => HomeDetailPage(
+                        pageInfo: "",
+                        titleStr: snapshot.data!.docs[index]['title'],
+                        explainStr: snapshot.data!.docs[index]['explain'],
+                        imgURL: snapshot.data!.docs[index]['firstPicUrl'],
+                        keyValue: snapshot.data!.docs[index]['key'],
+                        heart: snapshot.data!.docs[index]['like'],
+                        exchange: snapshot.data!.docs[index]['exchange'],
+                        left: snapshot.data!.docs[index]['left'],
+                        price: snapshot.data!.docs[index]['price'],
+                        weight: snapshot.data!.docs[index]['weight'],
+                        where: snapshot.data!.docs[index]['wherefrom'],
+                        wrap: snapshot.data!.docs[index]['wraptype'],
+                      ),
+                    ),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0)),
+                      clipBehavior: Clip.antiAlias,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Row(
+                              children: [
+                                Icon(Icons.check),
+                                Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10)),
+                                Text("판매처명"),
+                              ],
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Material(
+                                color: Colors.transparent,
+                                child: SizedBox(
+                                  width: 100,
+                                  height: 100,
+                                  child: AspectRatio(
+                                    aspectRatio: 18 / 11,
+                                    child: Image.asset(
+                                        "assets/images/55205930.jpg"),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10)),
+                              Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Padding(
@@ -376,7 +342,7 @@ class _OrderedCheckState extends State<OrderedCheck> {
                                           //     '1kg당 ${snapshot.data!.docs[index]['price'] / snapshot.data!.docs[index]['weight']}원',
                                           //     style: NunitoProductSmall()),
                                           Text(
-                                            "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight'].toInt()}Kg",
+                                            "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}Kg",
                                             style: NunitoProductTitle(),
                                           ),
                                           SizedBox(height: 4.0),
@@ -390,28 +356,35 @@ class _OrderedCheckState extends State<OrderedCheck> {
                                         ],
                                       ),
                                     ],
+
                                   ),
-                                  Divider(
-                                    height: 300,
-                                    thickness: 2,
-                                  ),
-                                  Text("data"),
+                                  SizedBox(height: 4.0),
+                                  Text(
+                                      '${snapshot.data!.docs[index]['price']}원',
+                                      style: NunitoProductPrice()),
+                                  SizedBox(height: 4.0),
+                                  Text(
+                                      '1kg당 ${NumberFormat("###.0#", "en_US").format(int.parse(snapshot.data!.docs[index]['price']) / int.parse(snapshot.data!.docs[index]['weight']))}원',
+                                      style: NunitoProductSmall()),
                                 ],
                               ),
-                            ),
+                            ],
                           ),
-                      
-                    )
-                    ), gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2),
-              ),
-
+                        ],
+                      ),
+                    ),
+                  ),
+                )),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
+              childAspectRatio: itemWidth / itemHeight,
             ),
           ),
         );
       },
     );
   }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -549,33 +522,19 @@ class _OrderedCheckState extends State<OrderedCheck> {
     );
   }
 }
-Future deleteData(String id) async{
-try {
-  await  FirebaseFirestore.instance
-      .collection("Users")
-      .doc(FirebaseAuth.instance.currentUser!.email)
-      .collection("Like")
-      .doc(id)
-      .delete();
-  }catch (e){
+
+Future deleteData(String id) async {
+  try {
+    await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection("Like")
+        .doc(id)
+        .delete();
+  } catch (e) {
     print('e');
     return false;
   }
-}  
 
-
-
-class QuestionPage extends StatefulWidget {
-  const QuestionPage({Key? key}) : super(key: key);
-
-  @override
-  State<QuestionPage> createState() => _QuestionPageState();
-}
-
-class _QuestionPageState extends State<QuestionPage> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
 }
 

@@ -1,9 +1,12 @@
 import 'package:c_real/home_detail.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'consumer.dart';
 import 'theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 int pageChanged = 0;
 
@@ -42,6 +45,9 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late TabController _tabController;
 
   Widget _home() {
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = size.height / 3;
+    final double itemWidth = size.width / 2;
     return Padding(
       padding:
           const EdgeInsets.only(top: 15.0, left: 8.0, right: 8.0, bottom: 5.0),
@@ -57,34 +63,35 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
             }
             return Container(
                 height: 400,
-                
-
                 child: Scrollbar(
                     child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: itemWidth / itemHeight,
+                  ),
                   itemCount: snapshot.data?.docs.length,
                   itemBuilder: ((context, index) => Container(
                       padding: const EdgeInsets.only(
                           top: 8.0, left: 8.0, right: 8.0),
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0)),
-                      clipBehavior: Clip.antiAlias,
-                        child: InkWell(
-                          
-                          onTap: () => Get.to(() => HomeDetailPage(
-                                pageInfo: "",
-                                titleStr: snapshot.data!.docs[index]['title'],
-                                explainStr: snapshot.data!.docs[index]['explain'],
-                                imgURL: snapshot.data!.docs[index]['firstPicUrl'],
-                                keyValue: snapshot.data!.docs[index]['key'],
-                                heart: snapshot.data!.docs[index]['like'],
-                                exchange : snapshot.data!.docs[index]['exchange'],
-                                left : snapshot.data!.docs[index]['left'],
-                                price : snapshot.data!.docs[index]['price'],
-                                weight : snapshot.data!.docs[index]['weight'],
-                                where : snapshot.data!.docs[index]['wherefrom'],
-                                wrap : snapshot.data!.docs[index]['wraptype'],
-                              )),
+                      child: InkWell(
+                        onTap: () => Get.to(() => HomeDetailPage(
+                              pageInfo: "",
+                              titleStr: snapshot.data!.docs[index]['title'],
+                              explainStr: snapshot.data!.docs[index]['explain'],
+                              imgURL: snapshot.data!.docs[index]['firstPicUrl'],
+                              keyValue: snapshot.data!.docs[index]['key'],
+                              heart: snapshot.data!.docs[index]['like'],
+                              exchange: snapshot.data!.docs[index]['exchange'],
+                              left: snapshot.data!.docs[index]['left'],
+                              price: snapshot.data!.docs[index]['price'],
+                              weight: snapshot.data!.docs[index]['weight'],
+                              where: snapshot.data!.docs[index]['wherefrom'],
+                              wrap: snapshot.data!.docs[index]['wraptype'],
+                            )),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0)),
+                          clipBehavior: Clip.antiAlias,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -92,35 +99,44 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 color: Colors.transparent,
                                 child: AspectRatio(
                                   aspectRatio: 18.0 / 11.0,
-                                  child: Image.asset("assets/images/55205930.jpg"),
+                                  child:
+                                      Image.asset("assets/images/55205930.jpg"),
                                 ),
                               ),
-                              Text(
-                                snapshot.data!.docs[index]['title'],
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                    16.0, 12.0, 16.0, 8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}kg",
+                                      style: NunitoProductTitle(),
+                                    ),
+                                    SizedBox(height: 4.0),
+                                    Text(
+                                        "${snapshot.data!.docs[index]['price']}원",
+                                        style: NunitoProductPrice()),
+                                    SizedBox(height: 4.0),
+                                    Text(
+                                        '1kg당 ${NumberFormat("###.#", "en_US").format(int.parse(snapshot.data!.docs[index]['price']) / int.parse(snapshot.data!.docs[index]['weight']))}원',
+                                        style: NunitoProductSmall()),
+                                  ],
                                 ),
                               ),
-                              Text(snapshot.data!.docs[index]['authorName'],
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 10,
-                                  )),
-                              Divider(color: Colors.black),
                             ],
                           ),
                         ),
-                      ))), gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-      ),
+                      ))),
                 )));
           }),
     );
   }
+
   Widget _home1() {
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = size.height / 3;
+    final double itemWidth = size.width / 2;
     return Padding(
       padding:
           const EdgeInsets.only(top: 15.0, left: 8.0, right: 8.0, bottom: 5.0),
@@ -139,30 +155,33 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
                 child: Scrollbar(
                     child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: itemWidth / itemHeight,
+                  ),
                   itemCount: snapshot.data?.docs.length,
                   itemBuilder: ((context, index) => Container(
                       padding: const EdgeInsets.only(
                           top: 8.0, left: 8.0, right: 8.0),
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0)),
-                      clipBehavior: Clip.antiAlias,
-                        child: InkWell(
-                          
-                          onTap: () => Get.to(() => HomeDetailPage(
-                                pageInfo: "",
-                                titleStr: snapshot.data!.docs[index]['title'],
-                                explainStr: snapshot.data!.docs[index]['explain'],
-                                imgURL: snapshot.data!.docs[index]['firstPicUrl'],
-                                keyValue: snapshot.data!.docs[index]['key'],
-                                heart: snapshot.data!.docs[index]['like'],
-                                exchange : snapshot.data!.docs[index]['exchange'],
-                                left : snapshot.data!.docs[index]['left'],
-                                price : snapshot.data!.docs[index]['price'],
-                                weight : snapshot.data!.docs[index]['weight'],
-                                where : snapshot.data!.docs[index]['wherefrom'],
-                                wrap : snapshot.data!.docs[index]['wraptype'],
-                              )),
+                      child: InkWell(
+                        onTap: () => Get.to(() => HomeDetailPage(
+                              pageInfo: "",
+                              titleStr: snapshot.data!.docs[index]['title'],
+                              explainStr: snapshot.data!.docs[index]['explain'],
+                              imgURL: snapshot.data!.docs[index]['firstPicUrl'],
+                              keyValue: snapshot.data!.docs[index]['key'],
+                              heart: snapshot.data!.docs[index]['like'],
+                              exchange: snapshot.data!.docs[index]['exchange'],
+                              left: snapshot.data!.docs[index]['left'],
+                              price: snapshot.data!.docs[index]['price'],
+                              weight: snapshot.data!.docs[index]['weight'],
+                              where: snapshot.data!.docs[index]['wherefrom'],
+                              wrap: snapshot.data!.docs[index]['wraptype'],
+                            )),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0)),
+                          clipBehavior: Clip.antiAlias,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -170,34 +189,40 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 color: Colors.transparent,
                                 child: AspectRatio(
                                   aspectRatio: 18.0 / 11.0,
-                                  child: Image.asset("assets/images/55205930.jpg"),
+                                  child:
+                                      Image.asset("assets/images/55205930.jpg"),
                                 ),
                               ),
-                              Text(
-                                snapshot.data!.docs[index]['title'],
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                    16.0, 12.0, 16.0, 8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}kg",
+                                      style: NunitoProductTitle(),
+                                    ),
+                                    SizedBox(height: 4.0),
+                                    Text(
+                                        "${snapshot.data!.docs[index]['price']}원",
+                                        style: NunitoProductPrice()),
+                                    SizedBox(height: 4.0),
+                                    Text(
+                                        '1kg당 ${NumberFormat("###.#", "en_US").format(int.parse(snapshot.data!.docs[index]['price']) / int.parse(snapshot.data!.docs[index]['weight']))}원',
+                                        style: NunitoProductSmall()),
+                                  ],
                                 ),
                               ),
-                              Text(snapshot.data!.docs[index]['authorName'],
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 10,
-                                  )),
-                              Divider(color: Colors.black),
                             ],
                           ),
                         ),
-                      ))), gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-      ),
+                      ))),
                 )));
           }),
     );
   }
+
   @override
   void initState() {
     super.initState();
@@ -319,45 +344,66 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return Scaffold(
 
         appBar: AppBar(
+          toolbarHeight: size.height / 8,
           backgroundColor: Color(0xff9EC151),
-          elevation: 0.0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(18),
+
+          flexibleSpace: Container(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Image.asset("assets/images/Group151.png"),
+                    Text(
+                      "메인화면",
+                      style: GoogleFonts.nunito(
+                          color: Colors.white,
+                          fontSize: 20,
+                          height: 27 / 20,
+                          letterSpacing: 0,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => OrderedCheck(),
+                          ),
+                        );
+                      },
+                      icon: Icon(
+                        Icons.shopping_bag,
+                        color: Colors.white,
+                      ),
+                    )
+                  ],
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  child: TextField(
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16)),
+                        prefixIcon: Icon(Icons.search),
+                        hintText: '어떤 농산물을 찾으세요?',
+                        hintStyle: GoogleFonts.nunito(
+                            color: Color(0xff9EC151),
+                            fontSize: 14,
+                            height: 19 / 13,
+                            letterSpacing: 0,
+                            fontWeight: FontWeight.w500),
+                        filled: true,
+                        fillColor: Colors.white),
+
+                  ),
+                )
+              ],
             ),
           ),
-
-          actions: [
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  _isSearchActivated = !_isSearchActivated;
-                });
-              },
-              icon: Icon(Icons.search),
-            ),
-
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => FavoritePage(),
-                  ),
-                );
-              },
-              icon: Icon(Icons.star),
-            ),
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => OrderedCheck(),
-                  ),
-                );
-              },
-              icon: Icon(Icons.shopping_bag),
-            )
-          ],
           bottom: TabBar(
             controller: _tabController,
             tabs: const <Widget>[
@@ -371,8 +417,53 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
         ),
 
-        body:
-        TabBarView(controller: _tabController, children: [
+        // appBar: AppBar(
+        //   backgroundColor: Color(0xff9EC151),
+        //   actions: [
+        //     IconButton(
+        //       onPressed: () {
+        //         setState(() {
+        //           _isSearchActivated = !_isSearchActivated;
+        //         });
+        //       },
+        //       icon: Icon(Icons.search),
+        //     ),
+        //     IconButton(onPressed: () {}, icon: Icon(Icons.logout_rounded)),
+        //     IconButton(
+        //       onPressed: () {
+        //         Navigator.of(context).push(
+        //           MaterialPageRoute(
+        //             builder: (context) => FavoritePage(),
+        //           ),
+        //         );
+        //       },
+        //       icon: Icon(Icons.star),
+        //     ),
+        //     IconButton(
+        //       onPressed: () {
+        //         Navigator.of(context).push(
+        //           MaterialPageRoute(
+        //             builder: (context) => OrderedCheck(),
+        //           ),
+        //         );
+        //       },
+        //       icon: Icon(Icons.shopping_bag),
+        //     )
+        //   ],
+        //   bottom: TabBar(
+        //     controller: _tabController,
+        //     tabs: const <Widget>[
+        //       Tab(
+        //         child: Text("과일"),
+        //       ),
+        //       Tab(
+        //         child: Text("야채"),
+        //       ),
+        //     ],
+        //   ),
+        // ),
+        body: TabBarView(controller: _tabController, children: [
+
           Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
