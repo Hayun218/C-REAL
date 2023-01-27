@@ -303,6 +303,13 @@
             </list>
           </value>
         </entry>
+        <entry key="fluttertoast">
+          <value>
+            <list>
+              <option value="D:/flutter_windows_3.3.7-stable/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-8.1.2/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="get">
           <value>
             <list>
@@ -688,6 +695,7 @@
       <root url="file://D:/flutter_windows_3.3.7-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_login_facebook-1.7.0/lib" />
       <root url="file://D:/flutter_windows_3.3.7-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-1.1.6/lib" />
       <root url="file://D:/flutter_windows_3.3.7-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutterfire_ui-0.4.3+20/lib" />
+      <root url="file://D:/flutter_windows_3.3.7-stable/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-8.1.2/lib" />
       <root url="file://D:/flutter_windows_3.3.7-stable/flutter/.pub-cache/hosted/pub.dartlang.org/get-4.6.5/lib" />
       <root url="file://D:/flutter_windows_3.3.7-stable/flutter/.pub-cache/hosted/pub.dartlang.org/get_storage-2.0.3/lib" />
       <root url="file://D:/flutter_windows_3.3.7-stable/flutter/.pub-cache/hosted/pub.dartlang.org/google_fonts-3.0.1/lib" />
