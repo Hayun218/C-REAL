@@ -1,53 +1,81 @@
-// // Copyright 2018-present the Flutter authors. All Rights Reserved.
-// //
-// // Licensed under the Apache License, Version 2.0 (the "License");
-// // you may not use this file except in compliance with the License.
-// // You may obtain a copy of the License at
-// //
-// // http://www.apache.org/licenses/LICENSE-2.0
-// //
-// // Unless required by applicable law or agreed to in writing, software
-// // distributed under the License is distributed on an "AS IS" BASIS,
-// // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// // See the License for the specific language governing permissions and
-// // limitations under the License.
-
+import 'package:c_real/profile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterfire_ui/auth.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'bottom.dart';
 
-import 'consumer.dart';
-import 'home.dart';
-import 'login.dart';
-import 'profile.dart';
-import 'community.dart';
 
-class CReal extends StatelessWidget {
-  const CReal({Key? key}) : super(key: key);
+class App extends StatelessWidget {
+  App({super.key});
+
+  FirebaseFirestore fireStore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'C:REAL',
-      home: HomePage(),
-      initialRoute: '/home',
-      routes: {
-        '/profile': (context) => MyProfile(),
-        '/home': (context) => HomePage(),
-        // '/login': (context) => LoginPage(),
-        '/community': (context) => ComPage(),
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return SignInScreen(
+            providerConfigs: const [
+              EmailProviderConfiguration(),
+              //  GoogleProviderConfiguration(
+              //   clientId: "852473898717-0kdn4itmvbc1bpie97tagqtqa33jvml5.apps.googleusercontent.com"
+              //  ),
+            ],
+             headerBuilder: (context, constraints, shrinkOffset) {
+               return Padding(
+                 padding: const EdgeInsets.all(20),
+                 child: AspectRatio(
+                   aspectRatio: 1,
+                   child: Image.asset('flutterfire_300x.png'),
+                 ),
+               );
+             },
+            subtitleBuilder: (context, action) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: action == AuthAction.signIn
+                    ? const Text('Welcome to FlutterFire, please sign in!')
+                    : const Text('Welcome to Flutterfire, please sign up!'),
+              );
+            },
+            footerBuilder: (context, action) {
+              return const Padding(
+                padding: EdgeInsets.only(top: 16),
+                child: Text(
+                  'By signing in, you agree to our terms and conditions.',
+                  style: TextStyle(color: Colors.grey),
+                ),
+              );
+            },
+            //  sideBuilder: (context, shrinkOffset) {
+            //    return Padding(
+            //      padding: const EdgeInsets.all(20),
+            //      child: AspectRatio(
+            //        aspectRatio: 1,
+            //        child: Image.asset('flutterfire_300x.png'),
+            //      ),
+            //    );
+            //  },
+          );
+        } else {
+          fireStore
+              .collection("Users")
+              .doc(FirebaseAuth.instance.currentUser?.email)
+              .set({
+            "userID": FirebaseAuth.instance.currentUser?.email,
+            "isSellor":1,
+            // "Name": FirebaseAuth.instance.currentUser?.displayName,
+          });
+
+          return BottomScreen();
+
+        }
       },
-      onGenerateRoute: _getRoute,
-    );
-  }
-
-  Route<dynamic>? _getRoute(RouteSettings settings) {
-    if (settings.name != '/login') {
-      return null;
-    }
-
-    return MaterialPageRoute<void>(
-      settings: settings,
-      builder: (BuildContext context) => HomePage(),
-      fullscreenDialog: true,
     );
   }
 }

@@ -8,6 +8,7 @@ class MyProfile extends StatefulWidget {
 }
 
 class _MyProfileState extends State<MyProfile> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,9 +22,11 @@ class _MyProfileState extends State<MyProfile> {
               alignment: Alignment.center,
               clipBehavior: Clip.none,
                 children: [
+
                   Container(decoration:  BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
+
                   ),
                     height: 200,
                     //width: 600,
@@ -238,11 +241,13 @@ class _MyProfileState extends State<MyProfile> {
           ),),
             ],
           ),
+
           actions: [
             TextButton(onPressed: () => Navigator.pop(context), child: Text("확인")),
           ],
         );
         }
     );
+
   }
 }
