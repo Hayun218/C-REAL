@@ -1,4 +1,5 @@
 import 'package:c_real/profile.dart';
+import 'package:c_real/profile_farmer.dart';
 import 'package:c_real/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/profile': (context) => MyProfile(),
         '/home': (context) => HomePage(),
+        '/farmerProfile': (context) => FarmerProfile(),
         // '/login': (context) => LoginPage(),
         '/payment-test': (context) => PaymentTest(),
         '/payment': (context) => Payment(),

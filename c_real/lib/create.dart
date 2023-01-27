@@ -15,6 +15,8 @@ import 'package:provider/provider.dart';
 import 'package:http_parser/http_parser.dart';
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
+
 import 'images.dart';
 
 
@@ -68,28 +70,34 @@ class _CreatePostPageState extends State<CreatePostPage> {
   var _selectedValue3 = '결제방식';
 
 
-  final ImagePicker _picker = ImagePicker();
-  List<XFile> _pickedImgs = [];
-  XFile? _pickedFile;
-
-  _getPhotoLibraryImage() async {
-    final pickedFile =
-    await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      setState(() {
-        _pickedFile = _pickedFile;
-      });
-    } else {
-      if (kDebugMode) {
-        print('이미지 선택안함');
-      }
-    }
-  }
 
   @override
   void initState() {
     titleUpload = false;
     contentUpload = false;
+  }
+  File? _image;
+  final picker = ImagePicker();
+
+  Future getImage(ImageSource imageSource) async {
+    final image = await picker.pickImage(source: imageSource);
+
+    setState(() {
+      _image = File(image!.path);
+    });
+  }
+
+  Widget showImage() {
+    return DottedBorder(
+      child: Container(
+          color: const Color(0xffd0cece),
+          width: 400,
+          height: 300,
+          child: Center(
+              child: _image == null
+                  ? Text('No image selected.')
+                  : Image.file(File(_image!.path)))),
+    );
   }
 
   void showDatePickerPop() {
@@ -113,6 +121,16 @@ class _CreatePostPageState extends State<CreatePostPage> {
         //gravity: ToastGravity.CENTER,  //위치(default 는 아래)
       );
     });
+  }
+
+
+  Future<String> _submit() async {
+    final storageRef = FirebaseStorage.instance.ref();
+
+    final mountainsRef = storageRef.child(_image!.path);
+    await mountainsRef.putFile(File(_image!.path));
+    String url = await mountainsRef.getDownloadURL();
+    return url;
   }
 
 
@@ -161,7 +179,39 @@ class _CreatePostPageState extends State<CreatePostPage> {
                     ),
                   ],
                 ),
-                CameraExample(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 25.0),
+                showImage(),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    // 카메라 촬영 버튼
+
+                    FloatingActionButton(
+                      child: Icon(Icons.add_a_photo),
+                      tooltip: 'pick Iamge',
+                      onPressed: () {
+                        getImage(ImageSource.camera);
+                      },
+                    ),
+
+
+                    FloatingActionButton(
+                      child: Icon(Icons.wallpaper),
+                      tooltip: 'pick Iamge',
+                      onPressed: () {
+                        getImage(ImageSource.gallery);
+                      },
+                    ),
+                  ],
+                )
+              ],
+            ),
 
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -397,6 +447,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   ]),
                 ),
                 ElevatedButton(
+
                     onPressed: _selectedValue == '카테고리' ||
                         _selectedValue0 == '배송방법' ||
                         _selectedValue1 == '배송속성' ||
@@ -412,6 +463,11 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         refund== ""
                         ? null
                         : () {
+                      String url = "";
+                      if(_image != null){
+                         url = _submit() as String;
+                      }
+
                       String postKey = getRandomString(16);
                       _selectedValue == '채소'?
                       fireStore
@@ -429,7 +485,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         "wherefrom":from,
                         "exchange" :refund,
                         "explain": story,
-                        "firstPicUrl": "",
+                        "firstPicUrl": url,
                         // "firstPicWidth": 0,
                         // "firstPicHeight": 0,
                         "authorName":
