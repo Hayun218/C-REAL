@@ -108,45 +108,20 @@ class BottomScreenState extends State<BottomScreen> {
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Text('Category'),
-                label: '',
-              ),
-              BottomNavigationBarItem(
                 icon: Text('Like'),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Text(''),
+                icon: Text('MyProfile'),
                 label: '',
               ),
-
             ],
           ),
         ),
       ),
-      floatingActionButtonLocation: 
-        FloatingActionButtonLocation.miniEndDocked,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: FloatingActionButton(
-          hoverElevation: 10,
-          splashColor: Color.fromARGB(255, 174, 26, 26),
-          tooltip:'plus',
-          elevation: 4,
-          child: Icon(Icons.add),
-          foregroundColor: Color.fromARGB(255, 34, 34, 32),
-
-          backgroundColor: Color.fromARGB(255, 253, 254, 254),
-          onPressed: () {
-            // setState(() {
-            // _selectedPageIndex = 3;
-            // });
-
-            // Get.to(() => CreatePostPage());
-          }
-          
-        ),
-      ),
+      // floatingActionButtonLocation: 
+      //   FloatingActionButtonLocation.miniEndDocked,
+      
     );
   }
   Widget logo(){
