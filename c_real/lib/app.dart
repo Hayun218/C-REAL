@@ -5,17 +5,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:flutter/src/foundation/key.dart';
-
 import 'bottom.dart';
-
-
 
 
 class App extends StatelessWidget {
   App({super.key});
 
   FirebaseFirestore fireStore = FirebaseFirestore.instance;
-
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +62,7 @@ class App extends StatelessWidget {
             //    );
             //  },
           );
-        }
-        else {
+        } else {
           fireStore
               .collection("Users")
               .doc(FirebaseAuth.instance.currentUser?.email)
@@ -75,11 +70,10 @@ class App extends StatelessWidget {
             "userID": FirebaseAuth.instance.currentUser?.email,
             // "Name": FirebaseAuth.instance.currentUser?.displayName,
           });
+
           return BottomScreen();
 
         }
-
-
       },
     );
   }
