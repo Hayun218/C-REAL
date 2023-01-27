@@ -37,6 +37,8 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
             );
           },
           child: Card(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
             clipBehavior: Clip.antiAlias,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,10 +62,10 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         "${fruitProductList[index].title}, ${fruitProductList[index].kiloWeight}Kg",
                         style: NunitoProductTitle(),
                       ),
-                      SizedBox(height: 8.0),
+                      SizedBox(height: 4.0),
                       Text('${fruitProductList[index].price}원',
                           style: NunitoProductPrice()),
-                      SizedBox(height: 8.0),
+                      SizedBox(height: 4.0),
                       Text(
                           '1kg당 ${fruitProductList[index].price / fruitProductList[index].kiloWeight}원',
                           style: NunitoProductSmall()),
@@ -331,3 +333,5 @@ List<Product> fruitProductList = [
   ),
 ];
 List<Product> favoriteProductList = [];
+
+List<Product> shoppingProductList = [];
