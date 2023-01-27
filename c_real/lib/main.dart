@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import 'community.dart';
 import 'firebase_options.dart';
 import 'home.dart';
@@ -18,10 +17,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-
-
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -33,22 +31,23 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           appBarTheme: const AppBarTheme(
             backgroundColor: Color.fromARGB(240, 255, 255, 255),
-            titleTextStyle: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 22),
+            titleTextStyle:
+                TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 22),
             iconTheme: IconThemeData(color: Color.fromARGB(255, 28, 22, 22)),
           ),
-          primarySwatch: Colors.blue
-      ),
+          primarySwatch: Colors.green),
       home: SplashScreen(),
       initialRoute: '/home',
-    routes: {
-      '/profile': (context) => MyProfile(),
-      '/home': (context) => HomePage(),
-      // '/login': (context) => LoginPage(),
-      '/community': (context) => ComPage(),
-    },
-    onGenerateRoute: _getRoute,
+      routes: {
+        '/profile': (context) => MyProfile(),
+        '/home': (context) => HomePage(),
+        // '/login': (context) => LoginPage(),
+        '/community': (context) => ComPage(),
+      },
+      onGenerateRoute: _getRoute,
     );
   }
+
   Route<dynamic>? _getRoute(RouteSettings settings) {
     if (settings.name != '/login') {
       return null;
