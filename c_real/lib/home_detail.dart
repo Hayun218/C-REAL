@@ -1,21 +1,61 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 //
 class HomeDetailPage extends StatefulWidget {
-  const HomeDetailPage({Key? key, required this.product}) : super(key: key);
-  final Product product;
+
+  String pageInfo;
+  String titleStr;
+  String explainStr;
+  String keyValue; 
+  String heart;
+  String imgURL;
+  String exchange;
+  String left ;
+  String price;
+  String weight;
+  String where;
+  String wrap ;
+  
+ 
+  HomeDetailPage(
+      {Key? key,
+      required this.pageInfo,
+      required this.titleStr,
+      required this.explainStr,
+      required this.keyValue,
+      required this.heart,
+      required this.exchange,
+      required this.left,
+      required this.price,
+      required this.weight,
+      required this.where,
+      required this.wrap,
+      this.imgURL = ''})
+      : super(key: key);  
   @override
   _HomeDetailPageState createState() =>
-      _HomeDetailPageState(product: this.product);
+      _HomeDetailPageState();
 }
 
 class _HomeDetailPageState extends State<HomeDetailPage> {
-  _HomeDetailPageState({
-    Key? key,
-    required this.product,
-  });
-  Product product;
+  
+  FirebaseFirestore fireStore = FirebaseFirestore.instance; 
+  Future<bool> onLikeButtonTapped(bool isLiked) async {
+    fireStore
+        .collection("Users")
+        .doc(FirebaseAuth.instance.currentUser?.email)
+        .collection("Like")
+        .doc(widget.keyValue)
+        .set({
+      "key": widget.keyValue,
+      "timeStamp": DateTime.now(),
+    });
+    return !isLiked;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,24 +67,13 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
               SizedBox(
                 height: 300.0,
                 child: Hero(
-                  tag: product.price,
+                  tag: widget.price,
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: (() {}),
-                      onDoubleTap: () {
-                        setState(() {
-                          if (product.isFavorited == false) {
-                            product.isFavorited = true;
-                            favoriteProductList.add(product);
-                          } else {
-                            product.isFavorited = false;
-                            favoriteProductList.remove(product);
-                          }
-                        });
-                      },
+                      
                       child: Image.asset(
-                        product.imagePath,
+                        widget.imgURL,
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -56,11 +85,45 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Icon(
-                      product.isFavorited
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      size: 40,
+                    IconButton(
+                      icon:Icon(Icons.bookmark) ,
+                      onPressed: (){
+                        fireStore
+                        .collection("Users")
+                        .doc(FirebaseAuth.instance.currentUser?.email)
+                        .collection("Like")
+                        .doc(widget.keyValue)
+                        .set({
+                          "title":widget.titleStr,
+                          "explain":widget.explainStr,
+                          "key": widget.keyValue,
+                          "timeStamp":DateTime.now(),
+                          "price": widget.price,
+                          "left" : widget.left,
+                          "weight":widget.weight,
+                          "wraptype":widget.wrap,
+                          "wherefrom":widget.where,
+                          "exchange" :widget.exchange,
+                          "firstPicUrl": "",
+                          // "firstPicWidth": 0,
+                          // "firstPicHeight": 0,
+                          "authorName":
+                              FirebaseAuth.instance.currentUser?.email,
+                          "like": "",
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar( 
+                            //SnackBar 구현하는법 context는 위에 BuildContext에 있는 객체를 그대로 가져오면 됨. 
+                              SnackBar(
+                                content: Text('찜목록에 추가가 되었습니다!'), //snack bar의 내용. icon, button같은것도 가능하다.
+                                duration: Duration(seconds: 1), //올라와있는 시간
+                                // action: SnackBarAction( //추가로 작업을 넣기. 버튼넣기라 생각하면 편하다.
+                                //   label: 'Undo', //버튼이름
+                                //   onPressed: (){}, //버튼 눌렀을때.
+                                // ),
+                              )
+                          );
+                      },
+                    
                       color: Colors.red,
                     ),
                   ],
@@ -70,7 +133,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
             Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-                child: Text(product.title)),
+                child: Text(widget.titleStr)),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
               child: Row(
@@ -83,7 +146,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                   SizedBox(
                     width: 10,
                   ),
-                  Text("${product.kiloWeight}kg"),
+                  Text("${widget.weight}kg"),
                 ],
               ),
             ),
@@ -99,7 +162,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                   SizedBox(
                     width: 10,
                   ),
-                  Text("${product.price}원"),
+                  Text("${widget.price}원"),
                 ],
               ),
             ),
@@ -113,7 +176,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
               child: Text(
-                "${product.price}",
+                "${widget.price}",
                 softWrap: true,
               ),
             ),
@@ -122,9 +185,40 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
         bottomNavigationBar: BottomAppBar(
           child: MaterialButton(
             onPressed: (() {
-              setState(() {
-                shoppingProductList.add(product);
-              });
+              fireStore
+                        .collection("Users")
+                        .doc(FirebaseAuth.instance.currentUser?.email)
+                        .collection("Basket")
+                        .doc(widget.keyValue)
+                        .set({
+                          "title":widget.titleStr,
+                          "explain":widget.explainStr,
+                          "key": widget.keyValue,
+                          "timeStamp":DateTime.now(),
+                          "price": widget.price,
+                          "left" : widget.left,
+                          "weight":widget.weight,
+                          "wraptype":widget.wrap,
+                          "wherefrom":widget.where,
+                          "exchange" :widget.exchange,
+                          "firstPicUrl": "",
+                          // "firstPicWidth": 0,
+                          // "firstPicHeight": 0,
+                          "authorName":
+                              FirebaseAuth.instance.currentUser?.email,
+                          "like": "",
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar( 
+                            //SnackBar 구현하는법 context는 위에 BuildContext에 있는 객체를 그대로 가져오면 됨. 
+                              SnackBar(
+                                content: Text('장바구니에 추가가 되었습니다!'), //snack bar의 내용. icon, button같은것도 가능하다.
+                                duration: Duration(seconds: 1), //올라와있는 시간
+                                // action: SnackBarAction( //추가로 작업을 넣기. 버튼넣기라 생각하면 편하다.
+                                //   label: 'Undo', //버튼이름
+                                //   onPressed: (){}, //버튼 눌렀을때.
+                                // ),
+                              )
+                          );
             }),
             child: Text("장바구니에 담기"),
           ),

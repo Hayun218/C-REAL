@@ -1,3 +1,4 @@
+
 name: c_real
 description: 2023Norithon SDG on Food
 
@@ -44,7 +45,11 @@ dependencies:
   firebase_ui_firestore: ^1.2.3
   auth: ^8.2.0
   get_storage: ^2.0.3
+  firebase_database: ^10.0.9
   flutterfire_ui: ^0.4.3+20
+  fluttertoast: ^8.1.2
+  liquid_progress_indicator: ^0.4.0
+  iamport_flutter: ^0.10.7
 
 dev_dependencies:
   flutter_test:
@@ -71,9 +76,8 @@ flutter:
     - assets/
     - assets/images/55205930.jpg
     - asset/splashlogo.png
-  # To add assets to your application, add an assets section, like this:
+    - assets/images/image16.png
 
-    
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
