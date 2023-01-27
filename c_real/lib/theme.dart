@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 //
-
 TextStyle CustomFont(double fontsize, double height, double letterSpacing) {
   return TextStyle(
       fontSize: fontsize,
@@ -16,7 +15,7 @@ TextStyle NunitoProductTitle() {
       fontSize: 16,
       height: 21.82 / 16,
       letterSpacing: 0,
-      fontWeight: FontWeight.w700);
+      fontWeight: FontWeight.w500);
 }
 
 TextStyle NunitoProductKiloweight() {
@@ -30,9 +29,16 @@ TextStyle NunitoProductKiloweight() {
 
 TextStyle NunitoProductPrice() {
   return GoogleFonts.nunito(
-      color: Color(0xff0AB362),
-      fontSize: 16,
-      height: 21.82 / 16,
+      fontSize: 20,
+      height: 25 / 20,
       letterSpacing: 0,
       fontWeight: FontWeight.w700);
+}
+
+TextStyle NunitoProductSmall() {
+  return GoogleFonts.nunito(
+      fontSize: 13,
+      height: 18 / 13,
+      letterSpacing: 0,
+      fontWeight: FontWeight.w400);
 }

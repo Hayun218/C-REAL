@@ -4,18 +4,15 @@ import 'package:get/get.dart';
 import 'consumer.dart';
 import 'theme.dart';
 
-import 'auth/core/authentication_manager.dart';
+int pageChanged = 0;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
-
   @override
   HomePageState createState() => HomePageState();
 }
 
 class HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  AuthenticationManager _authManager = Get.find();
-
   bool _isSearchActivated = false;
   late TabController _tabController;
 
@@ -25,33 +22,58 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
     _tabController = TabController(length: 2, vsync: this);
   }
 
-  List<Card> _buildGridCards(int count) {
-    List<Card> cards = List.generate(
+  List<Widget> _buildGridCards(int count) {
+    List<Widget> cards = List.generate(
       count,
       (int index) {
-        return Card(
-          clipBehavior: Clip.antiAlias,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              AspectRatio(
-                  aspectRatio: 18.0 / 11.0,
-                  child: Image.asset('assets/images/55205930.jpg')),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Title',
-                      style: NunitoProductTitle(),
-                    ),
-                    SizedBox(height: 8.0),
-                    Text('Secondary Text', style: NunitoProductTitle()),
-                  ],
+        return InkWell(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => HomeDetailPage(
+                  product: fruitProductList[index],
                 ),
               ),
-            ],
+            );
+          },
+          child: Card(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Hero(
+                  tag: fruitProductList[index].price,
+                  child: Material(
+                    color: Colors.transparent,
+                    child: AspectRatio(
+                      aspectRatio: 18.0 / 11.0,
+                      child: Image.asset("assets/images/55205930.jpg"),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "${fruitProductList[index].title}, ${fruitProductList[index].kiloWeight}Kg",
+                        style: NunitoProductTitle(),
+                      ),
+                      SizedBox(height: 4.0),
+                      Text('${fruitProductList[index].price}원',
+                          style: NunitoProductPrice()),
+                      SizedBox(height: 4.0),
+                      Text(
+                          '1kg당 ${fruitProductList[index].price / fruitProductList[index].kiloWeight}원',
+                          style: NunitoProductSmall()),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -107,20 +129,14 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  TabBar get _tabBar => TabBar(
-        isScrollable: true,
-        indicatorColor: Colors.black,
-        labelColor: Colors.black,
-        tabs: [
-          Container(height: 50, width: 48, child: Center(child: Text('채소'))),
-          Container(height: 50, width: 48, child: Center(child: Text('과일'))),
-        ],
-      );
-
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = size.height / 3;
+    final double itemWidth = size.width / 2;
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xff9EC151),
           actions: [
             IconButton(
               onPressed: () {
@@ -130,11 +146,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
               },
               icon: Icon(Icons.search),
             ),
-            IconButton(
-                onPressed: () {
-                  _authManager.logOut();
-                },
-                icon: Icon(Icons.logout_rounded)),
+            IconButton(onPressed: () {}, icon: Icon(Icons.logout_rounded)),
             IconButton(
               onPressed: () {
                 Navigator.of(context).push(
@@ -160,10 +172,10 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
             controller: _tabController,
             tabs: const <Widget>[
               Tab(
-                icon: Icon(Icons.cloud_outlined),
+                child: Text("과일"),
               ),
               Tab(
-                icon: Icon(Icons.beach_access_sharp),
+                child: Text("야채"),
               ),
             ],
           ),
@@ -183,6 +195,17 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         child: DefaultTabController(length: 2, child: _tabBar)),
                         */
                     Expanded(
+                      child: GridView.count(
+                        crossAxisCount: 2,
+                        padding: const EdgeInsets.all(16.0),
+
+                        childAspectRatio: itemWidth / itemHeight,
+                        // TODO: 파이어베이스 연동해서 변수값 가져오기
+                        children: _buildGridCards(fruitProductList.length), //
+                      ),
+                    ),
+                    /*
+                    Expanded(
                       child: ListView.builder(
                         padding: EdgeInsets.all(8),
                         itemCount: fruitProductList.length,
@@ -191,6 +214,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         },
                       ),
                     ),
+                    */
                   ],
                 ),
                 _isSearchActivated
@@ -239,18 +263,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ],
             ),
           ),
-        ])
-        //
-        // Expanded(
-        //   child: GridView.count(
-        //     crossAxisCount: 2,
-        //     padding: const EdgeInsets.all(16.0),
-        //     childAspectRatio: 8.0 / 9.0,
-        //     // TODO: 파이어베이스 연동해서 변수값 가져오기
-        //     children: _buildGridCards(10), //
-        //   ),
-        // ),
-        );
+        ]));
   }
 }
 
@@ -263,37 +276,62 @@ class Product {
     bool isFavorited = false,
   });
   final String imagePath;
-  final String price;
+  final int price;
   final String title;
-  final String kiloWeight;
+  final int kiloWeight;
   bool isFavorited = false;
 }
 
 List<Product> fruitProductList = [
   Product(
     imagePath: 'assets/images/55205930.jpg',
-    price: '10',
+    price: 10,
     title: 'title1',
-    kiloWeight: "1",
+    kiloWeight: 1,
   ),
   Product(
     imagePath: 'assets/images/55205930.jpg',
-    price: '11',
+    price: 11,
     title: 'title2',
-    kiloWeight: "1",
+    kiloWeight: 1,
   ),
   Product(
     imagePath: 'assets/images/55205930.jpg',
-    price: '12',
+    price: 12,
     title: 'title3',
-    kiloWeight: "1",
+    kiloWeight: 1,
   ),
   Product(
     imagePath: 'assets/images/55205930.jpg',
-    price: '13',
+    price: 3,
     title: 'title4',
-    kiloWeight: "1",
+    kiloWeight: 1,
+  ),
+  Product(
+    imagePath: 'assets/images/55205930.jpg',
+    price: 14,
+    title: 'title5',
+    kiloWeight: 1,
+  ),
+  Product(
+    imagePath: 'assets/images/55205930.jpg',
+    price: 15,
+    title: 'title6',
+    kiloWeight: 1,
+  ),
+  Product(
+    imagePath: 'assets/images/55205930.jpg',
+    price: 16,
+    title: 'title7',
+    kiloWeight: 1,
+  ),
+  Product(
+    imagePath: 'assets/images/55205930.jpg',
+    price: 17,
+    title: 'title8',
+    kiloWeight: 1,
   ),
 ];
-
 List<Product> favoriteProductList = [];
+
+List<Product> shoppingProductList = [];
