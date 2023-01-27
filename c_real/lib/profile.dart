@@ -109,11 +109,13 @@ class _MyProfileState extends State<MyProfile> {
                     ),
                     const SizedBox(width: 30),
                     TextButton(
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => QuestionPage()),
-                      ),
+                      onPressed: () {
+                      //   Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => QuestionPage()),
+                      // ),
+                      } ,
                       child: Text("취소/반품/교환목록"),
                     ),
                   ],
@@ -155,11 +157,13 @@ class _MyProfileState extends State<MyProfile> {
                     ),
                     const SizedBox(width: 30),
                     TextButton(
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => QuestionPage()),
-                      ),
+                      onPressed: () {
+                      //   Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => QuestionPage()),
+                      // ),
+                      } ,
                       child: Text("로그아웃"),
                     ),
                   ],

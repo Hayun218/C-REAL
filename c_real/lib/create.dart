@@ -59,35 +59,20 @@ class _CreatePostPageState extends State<CreatePostPage> {
     contentUpload = false;
   }
 
-  void showDatePickerPop() {
-    Future<DateTime?> selectedDate = showDatePicker(
-      context: context,
-      initialDate: DateTime.now(), //초기값
-      firstDate: DateTime(2022), //시작일
-      lastDate: DateTime(2024), //마지막일
-      builder: (BuildContext context, Widget? child) {
-        return Theme(
-          data: ThemeData.dark(), //다크 테마
-          child: child!,
-        );
-      },
-    );
-
-    selectedDate.then((dateTime) {
-      Fluttertoast.showToast(
-        msg: dateTime.toString(),
-        toastLength: Toast.LENGTH_LONG,
-        //gravity: ToastGravity.CENTER,  //위치(default 는 아래)
-      );
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("상품등록"),
+        title: Text("상품등록",style: TextStyle(
+          color: Color.fromARGB(255, 158, 193, 81),
+          fontWeight: FontWeight.bold
+
+        ),),
+        backgroundColor:Color.fromARGB(255, 245, 245, 245),
+        centerTitle: true,
+        elevation: 0,
       ),
+      backgroundColor: Color.fromARGB(255, 245, 245, 245),
       body: Padding(
         padding: const EdgeInsets.only(top: 10.0),
         child: SingleChildScrollView(
@@ -115,15 +100,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                     },
                   ),
                 ),  
-                Padding(padding: const EdgeInsets.only(left: 23),
-                  child: IconButton(
-                  icon: Icon(Icons.date_range),
-                  onPressed: () {
-                    showDatePickerPop();
-                  },
-                  
-                ),
-                )
+              
                
               ],
             ),
@@ -135,6 +112,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   prefixIcon: Icon(Icons.title),
                   border: OutlineInputBorder(),
                   labelText: '상품명',
+                  filled: true, //<-- SEE HERE
+    fillColor: Color.fromARGB(255, 255, 255, 255), 
                   // hintText: '제목',
                 ),
                 onChanged: (value) {
@@ -152,6 +131,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   prefixIcon: Icon(Icons.title),
                   border: OutlineInputBorder(),
                   labelText: '판매가',
+                                    filled: true, //<-- SEE HERE
+    fillColor: Color.fromARGB(255, 255, 255, 255),
                   // hintText: '제목',
                 ),
                 onChanged: (value) {
@@ -169,6 +150,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   prefixIcon: Icon(Icons.title),
                   border: OutlineInputBorder(),
                   labelText: '재고수량',
+                                    filled: true, //<-- SEE HERE
+    fillColor: Color.fromARGB(255, 255, 255, 255),
                   // hintText: '제목',
                 ),
                 onChanged: (value) {
@@ -186,6 +169,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.content_paste_go),
                   labelText: '상품상세',
+                  filled: true, //<-- SEE HERE
+                  fillColor: Color.fromARGB(255, 255, 255, 255),
                   // hintText: '내용을 입력하세요',
                 ),
                 maxLines: 15,
@@ -199,12 +184,15 @@ class _CreatePostPageState extends State<CreatePostPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                keyboardType: TextInputType.number,
                 controller: weightController,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.title),
                   border: OutlineInputBorder(),
                   labelText: '중량/용량',
                   // hintText: '제목',
+                  filled: true, //<-- SEE HERE
+                  fillColor: Color.fromARGB(255, 255, 255, 255),
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -221,6 +209,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   prefixIcon: Icon(Icons.title),
                   border: OutlineInputBorder(),
                   labelText: '포장타입',
+                  filled: true, //<-- SEE HERE
+                  fillColor: Color.fromARGB(255, 255, 255, 255),
                   // hintText: '제목',
                 ),
                 onChanged: (value) {
@@ -239,6 +229,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   border: OutlineInputBorder(),
                   labelText: '생산지',
                   // hintText: '제목',
+                  filled: true, //<-- SEE HERE
+                  fillColor: Color.fromARGB(255, 255, 255, 255),
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -255,6 +247,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.content_paste_go),
                   labelText: '교환/반품안내',
+                  filled: true, //<-- SEE HERE
+                  fillColor: Color.fromARGB(255, 255, 255, 255),
                   // hintText: '내용을 입력하세요',
                 ),
                 maxLines: 10,
@@ -404,6 +398,29 @@ class _CreatePostPageState extends State<CreatePostPage> {
                             .collection('Posts')
                             .doc(_selectedValue)
                             .collection('postsa')
+                            .doc(postKey)
+                            .set({
+                          "key": postKey,
+                          "title": postTitle,
+                          "price": price,
+                          "left" : number,
+                          "weight":weight,
+                          "wraptype":wraptype,
+                          "wherefrom":from,
+                          "exchange" :refund,
+                          "explain": story,
+                          "firstPicUrl": "",
+                          // "firstPicWidth": 0,
+                          // "firstPicHeight": 0,
+                          "authorName":
+                              FirebaseAuth.instance.currentUser?.email,
+                          "like": "",
+                          'timeStamp': DateTime.now(),
+                        });
+                        fireStore
+                            .collection('Farmer')
+                            .doc(FirebaseAuth.instance.currentUser?.email)
+                            .collection('store')
                             .doc(postKey)
                             .set({
                           "key": postKey,

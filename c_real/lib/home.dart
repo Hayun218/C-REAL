@@ -380,10 +380,10 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
             controller: _tabController,
             tabs: const <Widget>[
               Tab(
-                child: Text("과일"),
+                child: Text("채소"),
               ),
               Tab(
-                child: Text("야채"),
+                child: Text("과일"),
               ),
             ],
           ),
