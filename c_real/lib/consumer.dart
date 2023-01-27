@@ -414,7 +414,7 @@ class _OrderedCheckState extends State<OrderedCheck> {
                                       height: 30 / 25,
                                       letterSpacing: 0,
                                       fontWeight: FontWeight.w700)),
-                              Text('총N원',
+                              Text('총 12%',
                                   style: GoogleFonts.nunito(
                                       color: Color(0xff9EC151),
                                       fontSize: 25,
@@ -462,7 +462,7 @@ class _OrderedCheckState extends State<OrderedCheck> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  "구매하기 (${shoppingProductList.length})",
+                  "구매하러가기",
                   style: GoogleFonts.nunito(
                       color: Colors.white,
                       fontSize: 20,

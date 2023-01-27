@@ -1,7 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
+import 'bottom.dart';
 import 'home.dart';
 import 'home_detail.dart';
 import 'theme.dart';
@@ -51,7 +57,7 @@ class _OrderListPageState extends State<OrderListPage> {
                     children: [
                       Text("배송중"),
                       Text("   "),
-                      Text("00-00 도착"),
+                      Text("2/1 도착"),
                     ],
                   ),
                 ),
@@ -160,6 +166,159 @@ class _OrderListPageState extends State<OrderListPage> {
     return cards;
   }
 
+  Widget _basket() {
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = size.height / 6;
+    final double itemWidth = size.width / 2;
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection("Users")
+          .doc(FirebaseAuth.instance.currentUser?.email)
+          .collection("Basket")
+          .orderBy("timeStamp", descending: false)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        }
+        return Scrollbar(
+          child: GridView.builder(
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: ((context, index) => Container(
+                  padding:
+                      const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+                  child: InkWell(
+                    onTap: () => Get.to(
+                      () => HomeDetailPage(
+                        pageInfo: "",
+                        titleStr: snapshot.data!.docs[index]['title'],
+                        explainStr: snapshot.data!.docs[index]['explain'],
+                        imgURL: snapshot.data!.docs[index]['firstPicUrl'],
+                        keyValue: snapshot.data!.docs[index]['key'],
+                        heart: snapshot.data!.docs[index]['like'],
+                        exchange: snapshot.data!.docs[index]['exchange'],
+                        left: snapshot.data!.docs[index]['left'],
+                        price: snapshot.data!.docs[index]['price'],
+                        weight: snapshot.data!.docs[index]['weight'],
+                        where: snapshot.data!.docs[index]['wherefrom'],
+                        wrap: snapshot.data!.docs[index]['wraptype'],
+                      ),
+                    ),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0)),
+                      clipBehavior: Clip.antiAlias,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text("배송중"),
+                                Text("   "),
+                                Text("00-00 도착"),
+                              ],
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Material(
+                                color: Colors.transparent,
+                                child: SizedBox(
+                                  width: 100,
+                                  height: 100,
+                                  child: AspectRatio(
+                                    aspectRatio: 18 / 11,
+                                    child: Image.asset(
+                                        "assets/images/55205930.jpg"),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10)),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}Kg",
+                                    style: NunitoProductTitle(),
+                                  ),
+                                  SizedBox(height: 4.0),
+                                  Text(
+                                      '${snapshot.data!.docs[index]['price']}원',
+                                      style: NunitoProductPrice()),
+                                  SizedBox(height: 4.0),
+                                  Text(
+                                      '1kg당 ${NumberFormat("###.0#", "en_US").format(int.parse(snapshot.data!.docs[index]['price']) / int.parse(snapshot.data!.docs[index]['weight']))}원',
+                                      style: NunitoProductSmall()),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              MaterialButton(
+                                minWidth: 150,
+                                height: 40,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                onPressed: () {},
+                                color: Color(0xffE7E7E7),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "리뷰 작성하기",
+                                    style: GoogleFonts.nunito(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        height: 19 / 14,
+                                        letterSpacing: 0,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
+                              ),
+                              MaterialButton(
+                                minWidth: 150,
+                                height: 40,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                onPressed: () {},
+                                color: Color(0xff9EC151),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "배송조회",
+                                    style: GoogleFonts.nunito(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        height: 19 / 14,
+                                        letterSpacing: 0,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
+              childAspectRatio: itemWidth / itemHeight,
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -179,6 +338,17 @@ class _OrderListPageState extends State<OrderListPage> {
               fontWeight: FontWeight.w700),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => BottomScreen()),
+                    (route) => false);
+              },
+              icon: Icon(Icons.home))
+        ],
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -192,18 +362,22 @@ class _OrderListPageState extends State<OrderListPage> {
                         padding: const EdgeInsets.only(top: 30.0),
                         width: MediaQuery.of(context).size.width,
                         child: DefaultTabController(length: 2, child: _tabBar)),
-                        */
-                Expanded(
-                  child: GridView.count(
-                    crossAxisCount: 1,
-                    padding: const EdgeInsets.all(16.0),
+                //         */
+                // Expanded(
+                //   child: GridView.count(
+                //     crossAxisCount: 1,
+                //     padding: const EdgeInsets.all(16.0),
 
-                    childAspectRatio: itemWidth / itemHeight,
-                    // TODO: 파이어베이스 연동해서 변수값 가져오기
-                    children: _buildGridCards(shoppingProductList.length), //
-                  ),
+                //     childAspectRatio: itemWidth / itemHeight,
+                //     // TODO: 파이어베이스 연동해서 변수값 가져오기
+                //     children: _buildGridCards(shoppingProductList.length), //
+                //   ),
+                // ),
+                Expanded(
+                  child: _basket(),
                 ),
                 /*
+                
                     Expanded(
                       child: ListView.builder(
                         padding: EdgeInsets.all(8),
