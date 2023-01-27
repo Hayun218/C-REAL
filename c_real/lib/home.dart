@@ -1,6 +1,7 @@
 import 'package:c_real/home_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'consumer.dart';
 import 'theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -316,38 +317,64 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
     final double itemWidth = size.width / 2;
     return Scaffold(
         appBar: AppBar(
+          toolbarHeight: size.height / 8,
           backgroundColor: Color(0xff9EC151),
-          actions: [
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  _isSearchActivated = !_isSearchActivated;
-                });
-              },
-              icon: Icon(Icons.search),
-            ),
-            IconButton(onPressed: () {}, icon: Icon(Icons.logout_rounded)),
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => FavoritePage(),
+          flexibleSpace: Container(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Image.asset("assets/images/Group151.png"),
+                    Text(
+                      "메인화면",
+                      style: GoogleFonts.nunito(
+                          color: Colors.white,
+                          fontSize: 20,
+                          height: 27 / 20,
+                          letterSpacing: 0,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => OrderedCheck(),
+                          ),
+                        );
+                      },
+                      icon: Icon(
+                        Icons.shopping_bag,
+                        color: Colors.white,
+                      ),
+                    )
+                  ],
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  child: TextField(
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16)),
+                        prefixIcon: Icon(Icons.search),
+                        hintText: '어떤 농산물을 찾으세요?',
+                        hintStyle: GoogleFonts.nunito(
+                            color: Color(0xff9EC151),
+                            fontSize: 14,
+                            height: 19 / 13,
+                            letterSpacing: 0,
+                            fontWeight: FontWeight.w500),
+                        filled: true,
+                        fillColor: Colors.white),
                   ),
-                );
-              },
-              icon: Icon(Icons.star),
+                )
+              ],
             ),
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => OrderedCheck(),
-                  ),
-                );
-              },
-              icon: Icon(Icons.shopping_bag),
-            )
-          ],
+          ),
           bottom: TabBar(
             controller: _tabController,
             tabs: const <Widget>[
@@ -360,6 +387,51 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ],
           ),
         ),
+        // appBar: AppBar(
+        //   backgroundColor: Color(0xff9EC151),
+        //   actions: [
+        //     IconButton(
+        //       onPressed: () {
+        //         setState(() {
+        //           _isSearchActivated = !_isSearchActivated;
+        //         });
+        //       },
+        //       icon: Icon(Icons.search),
+        //     ),
+        //     IconButton(onPressed: () {}, icon: Icon(Icons.logout_rounded)),
+        //     IconButton(
+        //       onPressed: () {
+        //         Navigator.of(context).push(
+        //           MaterialPageRoute(
+        //             builder: (context) => FavoritePage(),
+        //           ),
+        //         );
+        //       },
+        //       icon: Icon(Icons.star),
+        //     ),
+        //     IconButton(
+        //       onPressed: () {
+        //         Navigator.of(context).push(
+        //           MaterialPageRoute(
+        //             builder: (context) => OrderedCheck(),
+        //           ),
+        //         );
+        //       },
+        //       icon: Icon(Icons.shopping_bag),
+        //     )
+        //   ],
+        //   bottom: TabBar(
+        //     controller: _tabController,
+        //     tabs: const <Widget>[
+        //       Tab(
+        //         child: Text("과일"),
+        //       ),
+        //       Tab(
+        //         child: Text("야채"),
+        //       ),
+        //     ],
+        //   ),
+        // ),
         body: TabBarView(controller: _tabController, children: [
           Container(
             height: MediaQuery.of(context).size.height,

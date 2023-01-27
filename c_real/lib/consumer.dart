@@ -224,7 +224,7 @@ class _OrderedCheckState extends State<OrderedCheck> {
 
   Widget _basket() {
     var size = MediaQuery.of(context).size;
-    final double itemHeight = size.height / 6;
+    final double itemHeight = size.height / 8;
     final double itemWidth = size.width / 2;
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
@@ -329,11 +329,6 @@ class _OrderedCheckState extends State<OrderedCheck> {
                               ),
                             ],
                           ),
-                          Divider(
-                            height: 35,
-                            thickness: 2,
-                          ),
-                          Center(child: Text("무료배송")),
                         ],
                       ),
                     ),
