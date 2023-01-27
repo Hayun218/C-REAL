@@ -24,13 +24,14 @@ class BottomScreenState extends State<BottomScreen> {
   late List<Map<String, Object>> _pages;
   int _selectedPageIndex = 0;
 
+  @override
   void initState() {
     _pages = [
       {
         'page': HomePage(),
       },
       {
-        // 'page': const LikePage(),
+
         'page': FavoritePage(),
 
       },
@@ -47,64 +48,41 @@ class BottomScreenState extends State<BottomScreen> {
     });
   }
 
-  // int _selectedIndex = 0;
-  // static const TextStyle optionStyle =
-  //     TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  // final List<Widget> _widgetOptions = <Widget>[
-  //   HomeScreen(),
-  //   const CategoryScreen(),
-  //   LikePage(),
-  //   CreatePostPage(),
-
-  //   // const NotificationPage(),
-
-  // ];
-
-// void _onItemTapped(int index) {
-//     setState(() {
-//       _selectedIndex = index;
-//     });
-//   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      backgroundColor: Color.fromARGB(255, 252, 251, 251),
       body: _pages[_selectedPageIndex]['page'] as Widget,
       bottomNavigationBar: BottomAppBar(
-        child: Container(
-          decoration: BoxDecoration(
-              color: Colors.grey,
-              border: Border(
-                  top: BorderSide(
-                color: Colors.grey,
-                width: 0.5,
-              ))),
-          child: BottomNavigationBar(
-            onTap: _selectPage,
-            selectedItemColor: Color.fromARGB(255, 17, 16, 17),
-            selectedFontSize: 20,
-            currentIndex: _selectedPageIndex,
-            items: [
-              BottomNavigationBarItem(
-                icon: Text('Home'),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: Text('Like'),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: Text('MyProfile'),
-                label: '',
-              ),
-            ],
+        notchMargin: 10,
+        shape: const AutomaticNotchedShape(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(30)),
           ),
+          StadiumBorder(),
+        ),
+
+        child: BottomNavigationBar(
+          onTap: _selectPage,
+          selectedItemColor: Colors.green,
+          selectedFontSize: 20,
+          currentIndex: _selectedPageIndex,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: '',
+            ),
+          ],
         ),
       ),
-      // floatingActionButtonLocation:
-      //   FloatingActionButtonLocation.miniEndDocked,
     );
   }
 }
