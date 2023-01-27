@@ -29,13 +29,13 @@ class _OrderListPageState extends State<OrderListPage> {
       (int index) {
         return InkWell(
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => HomeDetailPage(
-                  product: shoppingProductList[index],
-                ),
-              ),
-            );
+            // Navigator.of(context).push(
+            //   MaterialPageRoute(
+            //     builder: (context) => HomeDetailPage(
+            //       product: shoppingProductList[index],
+            //     ),
+            //   ),
+            // );
           },
           child: Card(
             shape: RoundedRectangleBorder(
