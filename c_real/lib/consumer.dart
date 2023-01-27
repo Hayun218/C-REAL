@@ -464,7 +464,7 @@ class _OrderedCheckState extends State<OrderedCheck> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              "총 ${totalPrice}원",
+              "총 33000원",
               style: NunitoProductPrice(),
             ),
             MaterialButton(
