@@ -318,11 +318,11 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
             IconButton(
               onPressed: () {
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (context) => OrderedCheck(),
-                //   ),
-                // );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => OrderedCheck(),
+                  ),
+                );
               },
               icon: Icon(Icons.shopping_bag),
             )

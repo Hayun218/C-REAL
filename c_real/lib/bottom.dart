@@ -1,3 +1,4 @@
+import 'package:c_real/consumer.dart';
 import 'package:c_real/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -32,7 +33,9 @@ class BottomScreenState extends State<BottomScreen> {
         'page':HomePage(),
       },
       {
-        'page': const LikePage(),
+        // 'page': const LikePage(),
+        'page': FavoritePage(),
+
       },
       {
         'page':MyProfile(),
