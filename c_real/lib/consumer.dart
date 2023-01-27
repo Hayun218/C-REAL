@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 
 import 'home.dart';
 import 'home_detail.dart';
@@ -352,11 +353,7 @@ class _OrderedCheckState extends State<OrderedCheck> {
                             onPressed: (() {
                               Navigator.of(context, rootNavigator: true)
                                   .pop('dialog');
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => OrderListPage(),
-                                ),
-                              );
+                              Get.toNamed('/payment-test');
                             }),
                             color: Color(0xff9EC151),
                             child: Padding(
