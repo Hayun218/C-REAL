@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
+
 //
 class HomeDetailPage extends StatefulWidget {
   const HomeDetailPage({Key? key, required this.product}) : super(key: key);
@@ -8,6 +9,7 @@ class HomeDetailPage extends StatefulWidget {
   _HomeDetailPageState createState() =>
       _HomeDetailPageState(product: this.product);
 }
+
 class _HomeDetailPageState extends State<HomeDetailPage> {
   _HomeDetailPageState({
     Key? key,
@@ -110,7 +112,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
             child: Text(
-              product.price,
+              "${product.price}",
               softWrap: true,
             ),
           ),
