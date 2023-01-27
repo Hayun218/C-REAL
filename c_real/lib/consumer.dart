@@ -1,10 +1,9 @@
-
-import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'home.dart';
 import 'home_detail.dart';
+import 'order_list.dart';
 import 'theme.dart';
 
 class FavoritePage extends StatefulWidget {
@@ -120,16 +119,6 @@ class _FavoritePageState extends State<FavoritePage> {
           ],
         ),
       ),
-      body: Container(
-        child: TextButton(
-          onPressed: FirebaseAuth.instance.signOut,
-          style: TextButton.styleFrom(
-            backgroundColor: Colors.white,
-            primary: Color.fromARGB(255, 27, 26, 26),
-          ),
-          child: const Text("로그아웃"),
-        ),
-      ),
     );
   }
 }
@@ -140,6 +129,17 @@ class OrderedCheck extends StatefulWidget {
 }
 
 class _OrderedCheckState extends State<OrderedCheck> {
+  int totalPrice = 0;
+
+  @override
+  void initState() {
+    setState(() {
+      for (int i = 0; i < shoppingProductList.length; i++) {
+        totalPrice = totalPrice + shoppingProductList[i].price;
+      }
+    });
+  }
+
   List<Widget> _buildGridCards(int count) {
     List<Widget> cards = List.generate(
       count,
@@ -165,7 +165,20 @@ class _OrderedCheckState extends State<OrderedCheck> {
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
                     children: [
-                      Icon(Icons.check),
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Icon(
+                            Icons.circle,
+                            color: Color(0xff9EC151),
+                            size: 35,
+                          ),
+                          Icon(
+                            Icons.check,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
                       Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                       Text("판매처명"),
                     ],
@@ -193,12 +206,28 @@ class _OrderedCheckState extends State<OrderedCheck> {
                           style: NunitoProductTitle(),
                         ),
                         SizedBox(height: 4.0),
-                        Text('${shoppingProductList[index].price}원',
-                            style: NunitoProductPrice()),
+                        Row(
+                          children: [
+                            IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    //TODO: 수량 -1
+                                  });
+                                },
+                                icon: Icon(Icons.remove)),
+                            Text("수량"),
+                            IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    //TODO: 수량 +1
+                                  });
+                                },
+                                icon: Icon(Icons.add)),
+                            Text('${shoppingProductList[index].price}원',
+                                style: NunitoProductPrice()),
+                          ],
+                        ),
                         SizedBox(height: 4.0),
-                        Text(
-                            '1kg당 ${shoppingProductList[index].price / shoppingProductList[index].kiloWeight}원',
-                            style: NunitoProductSmall()),
                         Text(
                             '1kg당 ${shoppingProductList[index].price / shoppingProductList[index].kiloWeight}원',
                             style: NunitoProductSmall()),
@@ -207,10 +236,10 @@ class _OrderedCheckState extends State<OrderedCheck> {
                   ],
                 ),
                 Divider(
-                  height: 300,
+                  height: 35,
                   thickness: 2,
                 ),
-                Text("data"),
+                Center(child: Text("무료배송")),
               ],
             ),
           ),
@@ -271,6 +300,100 @@ class _OrderedCheckState extends State<OrderedCheck> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomAppBar(
+          child: SizedBox(
+        height: size.height / 8,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              "총 ${totalPrice}원",
+              style: NunitoProductPrice(),
+            ),
+            MaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50.0)),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: SizedBox(
+                          height: size.height / 4,
+                          child: Column(
+                            children: [
+                              Image.asset("assets/images/image16.png"),
+                              Text('일반 마트보다',
+                                  style: GoogleFonts.nunito(
+                                      fontSize: 25,
+                                      height: 30 / 25,
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.w700)),
+                              Text('총N원',
+                                  style: GoogleFonts.nunito(
+                                      color: Color(0xff9EC151),
+                                      fontSize: 25,
+                                      height: 30 / 25,
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.w700)),
+                              Text('더 저렴하게 구입해요',
+                                  style: GoogleFonts.nunito(
+                                      fontSize: 25,
+                                      height: 30 / 25,
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.w700)),
+                            ],
+                          ),
+                        ),
+                        actions: <Widget>[
+                          MaterialButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50.0)),
+                            onPressed: (() {
+                              Navigator.of(context, rootNavigator: true)
+                                  .pop('dialog');
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => OrderListPage(),
+                                ),
+                              );
+                            }),
+                            color: Color(0xff9EC151),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text(
+                                "확인했어요",
+                                style: GoogleFonts.nunito(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    height: 25 / 20,
+                                    letterSpacing: 0,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                          ),
+                        ],
+                        actionsAlignment: MainAxisAlignment.center,
+                      );
+                    });
+              },
+              color: Color(0xff9EC151),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  "구매하기 (${shoppingProductList.length})",
+                  style: GoogleFonts.nunito(
+                      color: Colors.white,
+                      fontSize: 20,
+                      height: 25 / 20,
+                      letterSpacing: 0,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+            ),
+          ],
+        ),
+      )),
     );
   }
 }
