@@ -12,30 +12,30 @@ class MyProfile extends StatefulWidget {
 }
 
 class _MyProfileState extends State<MyProfile> {
-  BottomAppBar appBottom(BuildContext context) {
-    return BottomAppBar(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          IconButton(
-            onPressed: () => Navigator.pushNamed(context, '/home'),
-            icon: Icon(pageChanged == 0 ? Icons.home : Icons.home_outlined),
-          ),
-          IconButton(
-            onPressed: () => Navigator.pushNamed(context, '/community'),
-            icon: Icon(pageChanged == 1
-                ? Icons.fact_check
-                : Icons.fact_check_outlined),
-          ),
-          IconButton(
-              onPressed: () => Navigator.pushNamed(context, '/profile'),
-              icon: Icon(pageChanged == 2
-                  ? Icons.account_circle
-                  : Icons.account_circle_outlined)),
-        ],
-      ),
-    );
-  }
+  // BottomAppBar appBottom(BuildContext context) {
+  //   return BottomAppBar(
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //       children: [
+  //         IconButton(
+  //           onPressed: () => Navigator.pushNamed(context, '/home'),
+  //           icon: Icon(pageChanged == 0 ? Icons.home : Icons.home_outlined),
+  //         ),
+  //         IconButton(
+  //           onPressed: () => Navigator.pushNamed(context, '/community'),
+  //           icon: Icon(pageChanged == 1
+  //               ? Icons.fact_check
+  //               : Icons.fact_check_outlined),
+  //         ),
+  //         IconButton(
+  //             onPressed: () => Navigator.pushNamed(context, '/profile'),
+  //             icon: Icon(pageChanged == 2
+  //                 ? Icons.account_circle
+  //                 : Icons.account_circle_outlined)),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +100,7 @@ class _MyProfileState extends State<MyProfile> {
             ],
           ),
         ),
-        bottomNavigationBar: appBottom(context));
+        // bottomNavigationBar: appBottom(context)
+        );
   }
 }

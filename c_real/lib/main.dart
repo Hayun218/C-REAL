@@ -1,11 +1,16 @@
+import 'package:c_real/profile.dart';
 import 'package:c_real/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
+import 'community.dart';
 import 'firebase_options.dart';
-
+import 'home.dart';
+import 'consumer.dart';
+import 'login.dart';
+import 'profile.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +39,25 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue
       ),
       home: SplashScreen(),
+      initialRoute: '/home',
+    routes: {
+      '/profile': (context) => MyProfile(),
+      '/home': (context) => HomePage(),
+      // '/login': (context) => LoginPage(),
+      '/community': (context) => ComPage(),
+    },
+    onGenerateRoute: _getRoute,
+    );
+  }
+  Route<dynamic>? _getRoute(RouteSettings settings) {
+    if (settings.name != '/login') {
+      return null;
+    }
+
+    return MaterialPageRoute<void>(
+      settings: settings,
+      builder: (BuildContext context) => HomePage(),
+      fullscreenDialog: true,
     );
   }
 }
