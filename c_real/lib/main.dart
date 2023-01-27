@@ -4,11 +4,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'community.dart';
 import 'firebase_options.dart';
 import 'home.dart';
 import 'consumer.dart';
-import 'login.dart';
 import 'profile.dart';
 
 import 'screens/certification.dart';
@@ -50,7 +48,6 @@ class MyApp extends StatelessWidget {
         '/profile': (context) => MyProfile(),
         '/home': (context) => HomePage(),
         // '/login': (context) => LoginPage(),
-        '/community': (context) => ComPage(),
         '/payment-test': (context) => PaymentTest(),
         '/payment': (context) => Payment(),
         '/payment-result': (context) => PaymentResult(),
