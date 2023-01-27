@@ -1,4 +1,5 @@
 import 'package:c_real/home.dart';
+import 'package:c_real/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,7 +27,7 @@ class SplashView extends StatelessWidget {
           if (snapshot.hasError)
             return errorView(snapshot);
           else
-            return HomePage();
+            return MyProfile();
         }
       },
     );
