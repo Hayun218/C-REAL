@@ -1,10 +1,12 @@
 import 'package:c_real/home_detail.dart';
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'consumer.dart';
 import 'theme.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
   @override
   HomePageState createState() => HomePageState();
 }

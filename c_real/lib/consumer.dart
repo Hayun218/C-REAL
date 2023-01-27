@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class FavoritePage extends StatefulWidget {
@@ -11,6 +12,16 @@ class _FavoritePageState extends State<FavoritePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("즐겨찾기 관리"),
+      ),
+      body: Container(
+        child: TextButton(
+          onPressed: FirebaseAuth.instance.signOut,
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.white,
+            primary: Color.fromARGB(255, 27, 26, 26),
+          ),
+          child: const Text("로그아웃"),
+        ),
       ),
     );
   }
