@@ -1,4 +1,4 @@
-
+import 'package:c_real/home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,7 +26,7 @@ class SplashView extends StatelessWidget {
           if (snapshot.hasError)
             return errorView(snapshot);
           else
-            return OnBoard();
+            return HomePage();
         }
       },
     );
@@ -44,17 +44,16 @@ class SplashView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  backgroundImage: AssetImage('asset/splashlogo.png'),
-                  radius: 73,
-                )
-              ],
-            )
-          ),
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    backgroundImage: AssetImage('asset/splashlogo.png'),
+                    radius: 73,
+                  )
+                ],
+              )),
           Text('Loading...'),
         ],
       ),

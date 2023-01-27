@@ -1,3 +1,4 @@
+import 'package:c_real/home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -14,7 +15,7 @@ class OnBoard extends StatelessWidget {
     AuthenticationManager _authManager = Get.find();
 
     return Obx(() {
-      return _authManager.isLogged.value ? HomeView() : LoginView();
+      return _authManager.isLogged.value ? HomePage() : LoginView();
     });
   }
 }
