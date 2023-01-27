@@ -50,6 +50,7 @@ dependencies:
   fluttertoast: ^8.1.2
   liquid_progress_indicator: ^0.4.0
   iamport_flutter: ^0.10.7
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +78,7 @@ flutter:
     - assets/images/55205930.jpg
     - asset/splashlogo.png
     - assets/images/image16.png
+    - assets/images/Group151.png
 
   #   - images/a_dot_ham.jpeg
 
