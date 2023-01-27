@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'consumer.dart';
+
 import 'theme.dart';
 
-import 'auth/core/authentication_manager.dart';
-
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
   @override
   HomePageState createState() => HomePageState();
 }
 
 class HomePageState extends State<HomePage> {
-  AuthenticationManager _authManager = Get.find();
-
   List<Card> _buildGridCards(int count) {
     List<Card> cards = List.generate(
       count,
@@ -99,39 +92,19 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.search),
-          ),
-          IconButton(
-              onPressed: () {
-                _authManager.logOut();
-              },
-              icon: Icon(Icons.logout_rounded)),
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => FavoritePage(),
-                ),
-              );
-            },
-            icon: Icon(Icons.star),
-          ),
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => OrderedCheck(),
-                ),
-              );
-            },
-            icon: Icon(Icons.shopping_bag),
-          )
-        ],
-      ),
+      // appBar:
+      // AppBar(
+      //   actions: [
+      //     IconButton(
+      //       onPressed: () {},
+      //       icon: Icon(Icons.search),
+      //     ),
+      //     IconButton(
+      //       onPressed: () {},
+      //       icon: Icon(Icons.menu),
+      //     )
+      //   ],
+      // ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
