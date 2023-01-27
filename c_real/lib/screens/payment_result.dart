@@ -1,3 +1,4 @@
+import 'package:c_real/order_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -114,10 +115,12 @@ class PaymentResult extends StatelessWidget {
             ElevatedButton.icon(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
-                Get.offAllNamed('/');
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => OrderListPage()),
+                );
               },
               label: Text(
-                '돌아가기',
+                '',
                 style: TextStyle(fontSize: 16, color: Colors.white),
               ),
               style: ElevatedButton.styleFrom(
