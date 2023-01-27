@@ -1,4 +1,5 @@
 import 'package:c_real/home_detail.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'consumer.dart';
@@ -305,7 +306,9 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
               },
               icon: Icon(Icons.search),
             ),
-            IconButton(onPressed: () {}, icon: Icon(Icons.logout_rounded)),
+            IconButton(onPressed: () {
+              FirebaseAuth.instance.signOut;
+            }, icon: Icon(Icons.logout_rounded)),
             IconButton(
               onPressed: () {
                 Navigator.of(context).push(

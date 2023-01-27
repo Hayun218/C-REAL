@@ -377,7 +377,7 @@ class _OrderedCheckState extends State<OrderedCheck> {
                                           //     '1kg당 ${snapshot.data!.docs[index]['price'] / snapshot.data!.docs[index]['weight']}원',
                                           //     style: NunitoProductSmall()),
                                           Text(
-                                            "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight'].toInt()}Kg",
+                                            "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}Kg",
                                             style: NunitoProductTitle(),
                                           ),
                                           SizedBox(height: 4.0),
