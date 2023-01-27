@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
+import 'create.dart';
 
 class LikePage extends StatelessWidget {
   const LikePage({super.key});
@@ -22,7 +26,7 @@ class LikePage extends StatelessWidget {
             // _selectedPageIndex = 3;
             // });
 
-            // Get.to(() => CreatePostPage());
+            Get.to(() => CreatePostPage());
           }
           
         ),
