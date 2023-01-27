@@ -1,27 +1,19 @@
 import 'package:flutter/material.dart';
-
 import 'home.dart';
-
 //
-
 class HomeDetailPage extends StatefulWidget {
   const HomeDetailPage({Key? key, required this.product}) : super(key: key);
-
   final Product product;
-
   @override
   _HomeDetailPageState createState() =>
       _HomeDetailPageState(product: this.product);
 }
-
 class _HomeDetailPageState extends State<HomeDetailPage> {
   _HomeDetailPageState({
     Key? key,
     required this.product,
   });
-
   Product product;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

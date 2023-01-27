@@ -3,28 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'consumer.dart';
 import 'theme.dart';
-
-import 'auth/core/authentication_manager.dart';
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
-
   @override
   HomePageState createState() => HomePageState();
 }
-
 class HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  AuthenticationManager _authManager = Get.find();
-
   bool _isSearchActivated = false;
   late TabController _tabController;
-
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
   }
-
   List<Card> _buildGridCards(int count) {
     List<Card> cards = List.generate(
       count,
@@ -58,7 +49,6 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
     return cards;
   }
-
   Widget _ListViewCard(BuildContext context, int index) {
     return Card(
       child: InkWell(
@@ -106,21 +96,11 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
       ),
     );
   }
-
-  TabBar get _tabBar => TabBar(
-        isScrollable: true,
-        indicatorColor: Colors.black,
-        labelColor: Colors.black,
-        tabs: [
-          Container(height: 50, width: 48, child: Center(child: Text('채소'))),
-          Container(height: 50, width: 48, child: Center(child: Text('과일'))),
-        ],
-      );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xff9EC151),
           actions: [
             IconButton(
               onPressed: () {
@@ -130,11 +110,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
               },
               icon: Icon(Icons.search),
             ),
-            IconButton(
-                onPressed: () {
-                  _authManager.logOut();
-                },
-                icon: Icon(Icons.logout_rounded)),
+            IconButton(onPressed: () {}, icon: Icon(Icons.logout_rounded)),
             IconButton(
               onPressed: () {
                 Navigator.of(context).push(
@@ -160,10 +136,10 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
             controller: _tabController,
             tabs: const <Widget>[
               Tab(
-                icon: Icon(Icons.cloud_outlined),
+                child: Text("과일"),
               ),
               Tab(
-                icon: Icon(Icons.beach_access_sharp),
+                child: Text("야채"),
               ),
             ],
           ),
@@ -253,7 +229,6 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
         );
   }
 }
-
 class Product {
   Product({
     required this.imagePath,
@@ -268,7 +243,6 @@ class Product {
   final String kiloWeight;
   bool isFavorited = false;
 }
-
 List<Product> fruitProductList = [
   Product(
     imagePath: 'assets/images/55205930.jpg',
@@ -295,5 +269,4 @@ List<Product> fruitProductList = [
     kiloWeight: "1",
   ),
 ];
-
 List<Product> favoriteProductList = [];
