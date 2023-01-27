@@ -112,22 +112,38 @@ class PaymentResult extends StatelessWidget {
                 ],
               ),
             ),
-            ElevatedButton.icon(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => OrderListPage()),
-                );
-              },
-              label: Text(
-                '',
-                style: TextStyle(fontSize: 16, color: Colors.white),
-              ),
-              style: ElevatedButton.styleFrom(
-                elevation: 0,
-                shadowColor: Colors.transparent,
-              ),
-            ),
+            isSuccessed
+                ? ElevatedButton.icon(
+                    icon: Icon(Icons.check),
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => OrderListPage()),
+                      );
+                    },
+                    label: Text(
+                      '결제 완료',
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      shadowColor: Colors.transparent,
+                    ),
+                  )
+                : ElevatedButton.icon(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    label: Text(
+                      '뒤로가기',
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      shadowColor: Colors.transparent,
+                    ),
+                  )
           ],
         ),
       ),
