@@ -1,3 +1,4 @@
+import 'package:c_real/consumer.dart';
 import 'package:c_real/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -29,7 +30,9 @@ class BottomScreenState extends State<BottomScreen> {
         'page': HomePage(),
       },
       {
-        'page': const LikePage(),
+        // 'page': const LikePage(),
+        'page': FavoritePage(),
+
       },
       {
         'page': MyProfile(),
@@ -66,12 +69,10 @@ class BottomScreenState extends State<BottomScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       backgroundColor: Color.fromARGB(255, 252, 251, 251),
       body: _pages[_selectedPageIndex]['page'] as Widget,
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 0.01,
-        clipBehavior: Clip.antiAlias,
         child: Container(
           decoration: BoxDecoration(
               color: Colors.grey,

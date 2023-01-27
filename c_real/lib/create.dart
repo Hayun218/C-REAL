@@ -377,10 +377,11 @@ class _CreatePostPageState extends State<CreatePostPage> {
                     ? null
                     : () {
                         String postKey = getRandomString(16);
+                        _selectedValue == '채소'?
                         fireStore
-                            .collection(_selectedValue)
-                            .doc('Posts')
                             .collection('Posts')
+                            .doc(_selectedValue)
+                            .collection('posts')
                             .doc(postKey)
                             .set({
                           "key": postKey,
@@ -393,11 +394,33 @@ class _CreatePostPageState extends State<CreatePostPage> {
                           "exchange" :refund,
                           "explain": story,
                           "firstPicUrl": "",
-                          "firstPicWidth": 0,
-                          "firstPicHeight": 0,
+                          // "firstPicWidth": 0,
+                          // "firstPicHeight": 0,
                           "authorName":
-                              FirebaseAuth.instance.currentUser!.displayName,
-                          "like": 0,
+                              FirebaseAuth.instance.currentUser?.email,
+                          "like": "",
+                          'timeStamp': DateTime.now(),
+                        }):fireStore
+                            .collection('Posts')
+                            .doc(_selectedValue)
+                            .collection('postsa')
+                            .doc(postKey)
+                            .set({
+                          "key": postKey,
+                          "title": postTitle,
+                          "price": price,
+                          "left" : number,
+                          "weight":weight,
+                          "wraptype":wraptype,
+                          "wherefrom":from,
+                          "exchange" :refund,
+                          "explain": story,
+                          "firstPicUrl": "",
+                          // "firstPicWidth": 0,
+                          // "firstPicHeight": 0,
+                          "authorName":
+                              FirebaseAuth.instance.currentUser?.email,
+                          "like": "",
                           'timeStamp': DateTime.now(),
                         });
                         Get.back();
