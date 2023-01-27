@@ -35,6 +35,11 @@ class BottomScreenState extends State<BottomScreen> {
 
       },
       {
+        'page': OrderedCheck(),
+        // 'page': FavoritePage(),
+
+      },
+      {
         'page': MyProfile(),
       },
     ];
@@ -47,30 +52,11 @@ class BottomScreenState extends State<BottomScreen> {
     });
   }
 
-  // int _selectedIndex = 0;
-  // static const TextStyle optionStyle =
-  //     TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  // final List<Widget> _widgetOptions = <Widget>[
-  //   HomeScreen(),
-  //   const CategoryScreen(),
-  //   LikePage(),
-  //   CreatePostPage(),
-
-  //   // const NotificationPage(),
-
-  // ];
-
-// void _onItemTapped(int index) {
-//     setState(() {
-//       _selectedIndex = index;
-//     });
-//   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
-      backgroundColor: Color.fromARGB(255, 252, 251, 251),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: _pages[_selectedPageIndex]['page'] as Widget,
       bottomNavigationBar: BottomAppBar(
         child: Container(
@@ -84,19 +70,43 @@ class BottomScreenState extends State<BottomScreen> {
           child: BottomNavigationBar(
             onTap: _selectPage,
             selectedItemColor: Color.fromARGB(255, 17, 16, 17),
-            selectedFontSize: 20,
+            selectedFontSize: 0,
             currentIndex: _selectedPageIndex,
             items: [
               BottomNavigationBarItem(
-                icon: Text('Home'),
+                activeIcon: Image.asset(
+                  'asset/집4x.png',
+                  height: 25,
+                  width: 25,
+                ),
+                icon: Image.asset('asset/집회색4x.png',height: 25,width: 25,),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Text('Like'),
+                activeIcon: Image.asset(
+                  'asset/하트4x.png',
+                  height: 25,
+                  width: 25,
+                ),
+                icon: Image.asset('asset/하트회색4x.png',height: 25,width: 25,),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Text('MyProfile'),
+                activeIcon: Image.asset(
+                  'asset/카트4x.png',
+                  height: 25,
+                  width: 25,
+                ),
+                icon: Image.asset('asset/카트회색4x.png',height: 25,width: 25,),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                activeIcon: Image.asset(
+                  'asset/사람4x.png',
+                  height: 25,
+                  width: 25,
+                ),
+                icon: Image.asset('asset/사람회색4x.png',height: 25,width: 25,),
                 label: '',
               ),
             ],
@@ -108,3 +118,98 @@ class BottomScreenState extends State<BottomScreen> {
     );
   }
 }
+
+class BottomScreen1 extends StatefulWidget {
+  const BottomScreen1({Key? key}) : super(key: key);
+
+  @override
+  State<BottomScreen1> createState() => BottomScreenState1();
+}
+
+class BottomScreenState1 extends State<BottomScreen1> {
+  late List<Map<String, Object>> _pages;
+  int _selectedPageIndex = 0;
+
+  void initState() {
+    _pages = [
+      {
+        'page': HomePage(),
+      },
+      {
+        // 'page': const LikePage(),
+        'page': LikePage(),
+
+      },
+     
+      {
+        'page': MyProfile(),
+      },
+    ];
+    super.initState();
+  }
+
+  void _selectPage(int index) {
+    setState(() {
+      _selectedPageIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      body: _pages[_selectedPageIndex]['page'] as Widget,
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.grey,
+              border: Border(
+                  top: BorderSide(
+                color: Colors.grey,
+                width: 0.5,
+              ))),
+          child: BottomNavigationBar(
+            onTap: _selectPage,
+            selectedItemColor: Color.fromARGB(255, 17, 16, 17),
+            selectedFontSize: 0,
+            currentIndex: _selectedPageIndex,
+            items: [
+              BottomNavigationBarItem(
+                activeIcon: Image.asset(
+                  'asset/집4x.png',
+                  height: 25,
+                  width: 25,
+                ),
+                icon: Image.asset('asset/집회색4x.png',height: 25,width: 25,),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                activeIcon: Image.asset(
+                  'asset/상점4x.png',
+                  height: 25,
+                  width: 25,
+                ),
+                icon: Image.asset('asset/상점회색4x.png',height: 25,width: 25,),
+                label: '',
+              ),
+              
+              BottomNavigationBarItem(
+                activeIcon: Image.asset(
+                  'asset/사람4x.png',
+                  height: 25,
+                  width: 25,
+                ),
+                icon: Image.asset('asset/사람회색4x.png',height: 25,width: 25,),
+                label: '',
+              ),
+            ],
+          ),
+        ),
+      ),
+      // floatingActionButtonLocation:
+      //   FloatingActionButtonLocation.miniEndDocked,
+    );
+  }
+}
+
