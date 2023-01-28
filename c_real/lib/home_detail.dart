@@ -90,6 +90,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
           children: [
             SizedBox(
               height: 300.0,
+
               child: Hero(
                 tag: widget.price,
                 child: Material(
@@ -100,6 +101,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                     ),
                     borderRadius: BorderRadius.circular(16),
                   ),
+
                 ),
               ),
             ),

@@ -68,7 +68,7 @@ class App extends StatelessWidget {
               .set({
             "userID": FirebaseAuth.instance.currentUser?.email,
 
-            "isSellor":0,
+            "isSellor": 0,
 
             // "Name": FirebaseAuth.instance.currentUser?.displayName,
           });
@@ -98,15 +98,15 @@ class App1 extends StatelessWidget {
               //   clientId: "852473898717-0kdn4itmvbc1bpie97tagqtqa33jvml5.apps.googleusercontent.com"
               //  ),
             ],
-             headerBuilder: (context, constraints, shrinkOffset) {
-               return Padding(
-                 padding: const EdgeInsets.all(20),
-                 child: AspectRatio(
-                   aspectRatio: 1,
-                   child: Image.asset('flutterfire_300x.png'),
-                 ),
-               );
-             },
+            //  headerBuilder: (context, constraints, shrinkOffset) {
+            //    return Padding(
+            //      padding: const EdgeInsets.all(20),
+            //      child: AspectRatio(
+            //        aspectRatio: 1,
+            //        child: Image.asset('flutterfire_300x.png'),
+            //      ),
+            //    );
+            //  },
             subtitleBuilder: (context, action) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -140,12 +140,11 @@ class App1 extends StatelessWidget {
               .doc(FirebaseAuth.instance.currentUser?.email)
               .set({
             "userID": FirebaseAuth.instance.currentUser?.email,
-            "isSellor":1,
+            "isSellor": 1,
             // "Name": FirebaseAuth.instance.currentUser?.displayName,
           });
 
           return BottomScreen1();
-
         }
       },
     );

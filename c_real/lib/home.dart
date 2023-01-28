@@ -10,17 +10,15 @@ import 'package:intl/intl.dart';
 
 int pageChanged = 0;
 
-
-
-class Customshape extends CustomClipper<Path>{
+class Customshape extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     double height = size.height;
     double width = size.width;
 
     var path = Path();
-    path.lineTo(0, height-50);
-    path.quadraticBezierTo(width/2, height, width, height-50);
+    path.lineTo(0, height - 50);
+    path.quadraticBezierTo(width / 2, height, width, height - 50);
     path.lineTo(width, 0);
     path.close();
     return path;
@@ -31,7 +29,6 @@ class Customshape extends CustomClipper<Path>{
     // TODO: implement shouldReclip
     return true;
   }
-
 }
 
 class HomePage extends StatefulWidget {
@@ -120,7 +117,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                         style: NunitoProductPrice()),
                                     SizedBox(height: 4.0),
                                     Text(
-                                        '1kg당 ${NumberFormat("###.#", "en_US").format(int.parse(snapshot.data!.docs[index]['price']) / int.parse(snapshot.data!.docs[index]['weight']))}원',
+                                        '1kg당 ${NumberFormat("###.#", "en_US").format(double.parse(snapshot.data!.docs[index]['price']) / double.parse(snapshot.data!.docs[index]['weight']))}원',
                                         style: NunitoProductSmall()),
                                   ],
                                 ),
@@ -153,7 +150,6 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
             }
             return Container(
                 height: 400,
-
                 child: Scrollbar(
                     child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -210,7 +206,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                         style: NunitoProductPrice()),
                                     SizedBox(height: 4.0),
                                     Text(
-                                        '1kg당 ${NumberFormat("###.#", "en_US").format(int.parse(snapshot.data!.docs[index]['price']) / int.parse(snapshot.data!.docs[index]['weight']))}원',
+                                        '1kg당 ${NumberFormat("###.#", "en_US").format(double.parse(snapshot.data!.docs[index]['price']) / double.parse(snapshot.data!.docs[index]['weight']))}원',
                                         style: NunitoProductSmall()),
                                   ],
                                 ),
@@ -302,14 +298,11 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
           // );
         },
         child: ListTile(
-          leading: Hero(
-            tag: fruitProductList[index].price,
-            child: Material(
-              color: Colors.transparent,
-              child: AspectRatio(
-                aspectRatio: 1,
-                child: Image.asset("assets/images/55205930.jpg"),
-              ),
+          leading: Material(
+            color: Colors.transparent,
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: Image.asset("assets/images/55205930.jpg"),
             ),
           ),
           title: Column(
@@ -343,11 +336,9 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
     final double itemHeight = size.height / 3;
     final double itemWidth = size.width / 2;
     return Scaffold(
-
         appBar: AppBar(
           toolbarHeight: size.height / 8,
           backgroundColor: Color(0xff9EC151),
-
           flexibleSpace: Container(
             child: Column(
               children: [
@@ -399,7 +390,6 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             fontWeight: FontWeight.w500),
                         filled: true,
                         fillColor: Colors.white),
-
                   ),
                 )
               ],
@@ -464,7 +454,6 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
         //   ),
         // ),
         body: TabBarView(controller: _tabController, children: [
-
           Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
