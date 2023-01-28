@@ -73,7 +73,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
   final picker = ImagePicker();
 
   Future getImage(ImageSource imageSource) async {
-    final image = await picker.pickImage(source: imageSource);
+    final image = await picker.pickImage(source: ImageSource.gallery);
 
     setState(() {
       _image = File(image!.path);
@@ -481,7 +481,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                     refund == ""
                     ? null
                     : () {
-                  String url = "";
+                  String url = _image as String;
                   if (_image != null) {
                     url = _submit() as String;
                   }
@@ -526,7 +526,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                     "wherefrom": from,
                     "exchange": refund,
                     "explain": story,
-                    "firstPicUrl": "",
+                    "firstPicUrl": url,
                     // "firstPicWidth": 0,
                     // "firstPicHeight": 0,
                     "authorName":
@@ -549,7 +549,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                     "wherefrom": from,
                     "exchange": refund,
                     "explain": story,
-                    "firstPicUrl": "",
+                    "firstPicUrl": url,
                     // "firstPicWidth": 0,
                     // "firstPicHeight": 0,
                     "authorName":
