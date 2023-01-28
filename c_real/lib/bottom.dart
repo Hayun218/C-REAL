@@ -1,5 +1,6 @@
 import 'package:c_real/consumer.dart';
 import 'package:c_real/profile.dart';
+import 'package:c_real/profile_farmer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -143,7 +144,7 @@ class BottomScreenState1 extends State<BottomScreen1> {
       },
      
       {
-        'page': MyProfile(),
+        'page': FarmerProfile(),
       },
     ];
     super.initState();

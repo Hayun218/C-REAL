@@ -36,7 +36,7 @@ class LikePageState extends State<LikePage> with TickerProviderStateMixin {
       child: StreamBuilder<QuerySnapshot>(
           // stream: FirebaseFirestore.instance.collectionGroup('Posts').orderBy('timeStamp', descending: true).snapshots(),
           stream: FirebaseFirestore.instance
-              .collectionGroup('posts')
+              .collectionGroup('store')
               .orderBy('timeStamp', descending: true)
               .snapshots(),
           builder: (context, snapshot) {
@@ -82,7 +82,7 @@ class LikePageState extends State<LikePage> with TickerProviderStateMixin {
                                 child: AspectRatio(
                                   aspectRatio: 18.0 / 11.0,
                                   child:
-                                      Image.asset("assets/images/55205930.jpg"),
+                                      Image.network(snapshot.data!.docs[index]['firstPicUrl']),
                                 ),
                               ),
                               Padding(

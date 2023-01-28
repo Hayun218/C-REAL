@@ -534,6 +534,29 @@ class _CreatePostPageState extends State<CreatePostPage> {
                     "like": "",
                     'timeStamp': DateTime.now(),
                   });
+                  fireStore
+                      .collection('Users')
+                      .doc(FirebaseAuth.instance.currentUser?.email)
+                      .collection('store')
+                      .doc(postKey)
+                      .set({
+                    "key": postKey,
+                    "title": postTitle,
+                    "price": price,
+                    "left": number,
+                    "weight": weight,
+                    "wraptype": wraptype,
+                    "wherefrom": from,
+                    "exchange": refund,
+                    "explain": story,
+                    "firstPicUrl": "",
+                    // "firstPicWidth": 0,
+                    // "firstPicHeight": 0,
+                    "authorName":
+                    FirebaseAuth.instance.currentUser?.email,
+                    "like": "",
+                    'timeStamp': DateTime.now(),
+                  });
                   Get.back();
                   // FirebaseFirestore
                   // fireStore = FirebaseFirestore.instance;
