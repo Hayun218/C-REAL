@@ -100,7 +100,8 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 child: AspectRatio(
                                   aspectRatio: 18.0 / 11.0,
                                   child:
-                                      Image.asset("assets/images/55205930.jpg"),
+                                      Image.network(snapshot.data!.docs[index]['firstPicUrl'])
+
                                 ),
                               ),
                               Padding(
@@ -408,10 +409,10 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
             controller: _tabController,
             tabs: const <Widget>[
               Tab(
-                child: Text("과일"),
+                child: Text("채소"),
               ),
               Tab(
-                child: Text("야채"),
+                child: Text("과일"),
               ),
             ],
           ),
