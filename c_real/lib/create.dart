@@ -221,6 +221,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   // hintText: '제목',
                   filled: true, //<-- SEE HERE
                   fillColor: Colors.white,
+
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -232,6 +233,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                keyboardType: TextInputType.number,
                 controller: priceController,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.title),
@@ -290,6 +292,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                keyboardType: TextInputType.number,
                 controller: weightController,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.title),
@@ -356,6 +359,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   filled: true, //<-- SEE HERE
                   fillColor: Colors.white,
                 ),
+
                 maxLines: 10,
                 onChanged: (value) {
                   setState(() {
@@ -370,6 +374,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
               padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
                 color: Colors.white,
+
                 border: Border.all(
                   width: 1,
                   color: Color.fromARGB(255, 0, 0, 0),
@@ -385,7 +390,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   child: DropdownButton(
                     value: _selectedValue0,
                     items: _valueList0.map(
-                          (value) {
+
+                      (value) {
                         return DropdownMenuItem(
                           value: value,
                           child: Text(value),
@@ -404,7 +410,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   child: DropdownButton(
                     value: _selectedValue1,
                     items: _valueList1.map(
-                          (value) {
+
+                      (value) {
                         return DropdownMenuItem(
                           value: value,
                           child: Text(value),
@@ -442,7 +449,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   child: DropdownButton(
                     value: _selectedValue3,
                     items: _valueList3.map(
-                          (value) {
+                      (value) {
                         return DropdownMenuItem(
                           value: value,
                           child: Text(value),
@@ -533,6 +540,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                 },
                 style: ElevatedButton.styleFrom(
                     onSurface: Color.fromARGB(255, 158, 193, 81)),
+
                 child: Text("upload")),
           ]),
         ),

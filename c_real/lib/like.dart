@@ -250,6 +250,7 @@ class LikePageState extends State<LikePage> with TickerProviderStateMixin {
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(4.0),
         child: FloatingActionButton(
+            heroTag: 1,
             hoverElevation: 10,
             splashColor: Color.fromARGB(255, 174, 26, 26),
             tooltip: 'plus',

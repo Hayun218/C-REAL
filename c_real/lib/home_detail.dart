@@ -90,14 +90,11 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
           children: [
             SizedBox(
               height: 300.0,
-              child: Hero(
-                tag: widget.price,
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    child: Image.asset("assets/images/55205930.jpg"),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  child: Image.asset("assets/images/55205930.jpg"),
+                  borderRadius: BorderRadius.circular(16),
                 ),
               ),
             ),
