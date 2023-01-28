@@ -33,7 +33,7 @@ class _PaymentTestState extends State<PaymentTest> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('결제 테스트'),
+        title: Text('결제 페이지'),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
@@ -160,7 +160,7 @@ class _PaymentTestState extends State<PaymentTest> {
                 decoration: InputDecoration(
                   labelText: '결제금액(원)',
                 ),
-                initialValue: '10',
+                initialValue: '100',
                 validator: (value) {
                   if (value!.isEmpty) {
                     return '결제금액은 필수입력입니다.';
