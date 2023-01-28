@@ -233,6 +233,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                keyboardType: TextInputType.number,
                 controller: priceController,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.title),
@@ -291,6 +292,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                keyboardType: TextInputType.number,
                 controller: weightController,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.title),
