@@ -129,8 +129,16 @@ class _CreatePostPageState extends State<CreatePostPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("상품등록"),
+        title: Text("상품등록",
+        style: TextStyle(
+          color: Color.fromARGB(255, 158, 193, 81)
+        ),),
+        backgroundColor: Color.fromARGB(255, 245, 245, 245),
+        centerTitle: true,
+        elevation: 0,
       ),
+      backgroundColor: Color.fromARGB(255, 245, 245, 245),
+
       body: Padding(
         padding: const EdgeInsets.only(top: 10.0),
         child: SingleChildScrollView(
@@ -143,7 +151,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   child: DropdownButton(
                     value: _selectedValue,
                     items: _valueList.map(
-                      (value) {
+                          (value) {
                         return DropdownMenuItem(
                           value: value,
                           child: Text(value),
@@ -211,6 +219,9 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   border: OutlineInputBorder(),
                   labelText: '상품명',
                   // hintText: '제목',
+                  filled: true, //<-- SEE HERE
+                  fillColor: Colors.white,
+
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -228,6 +239,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   border: OutlineInputBorder(),
                   labelText: '판매가',
                   // hintText: '제목',
+                  filled: true, //<-- SEE HERE
+                  fillColor: Colors.white,
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -245,6 +258,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   border: OutlineInputBorder(),
                   labelText: '재고수량',
                   // hintText: '제목',
+                  filled: true, //<-- SEE HERE
+                  fillColor: Colors.white,
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -262,6 +277,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   prefixIcon: Icon(Icons.content_paste_go),
                   labelText: '상품상세',
                   // hintText: '내용을 입력하세요',
+                  filled: true, //<-- SEE HERE
+                  fillColor: Colors.white,
                 ),
                 maxLines: 15,
                 onChanged: (value) {
@@ -280,6 +297,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   border: OutlineInputBorder(),
                   labelText: '중량/용량',
                   // hintText: '제목',
+                  filled: true, //<-- SEE HERE
+                  fillColor: Colors.white,
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -297,6 +316,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   border: OutlineInputBorder(),
                   labelText: '포장타입',
                   // hintText: '제목',
+                  filled: true, //<-- SEE HERE
+                  fillColor: Colors.white,
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -314,6 +335,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   border: OutlineInputBorder(),
                   labelText: '생산지',
                   // hintText: '제목',
+                  filled: true, //<-- SEE HERE
+                  fillColor: Colors.white,
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -331,7 +354,10 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   prefixIcon: Icon(Icons.content_paste_go),
                   labelText: '교환/반품안내',
                   // hintText: '내용을 입력하세요',
+                  filled: true, //<-- SEE HERE
+                  fillColor: Colors.white,
                 ),
+
                 maxLines: 10,
                 onChanged: (value) {
                   setState(() {
@@ -345,12 +371,14 @@ class _CreatePostPageState extends State<CreatePostPage> {
               margin: const EdgeInsets.all(8.0),
               padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
+                color: Colors.white,
+
                 border: Border.all(
                   width: 1,
                   color: Color.fromARGB(255, 0, 0, 0),
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(5.0) // POINT
-                    ),
+                ),
               ), //  POINT: BoxDecor
               height: 230,
               child: Column(children: [
@@ -360,6 +388,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   child: DropdownButton(
                     value: _selectedValue0,
                     items: _valueList0.map(
+
                       (value) {
                         return DropdownMenuItem(
                           value: value,
@@ -379,6 +408,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   child: DropdownButton(
                     value: _selectedValue1,
                     items: _valueList1.map(
+
                       (value) {
                         return DropdownMenuItem(
                           value: value,
@@ -398,7 +428,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   child: DropdownButton(
                     value: _selectedValue2,
                     items: _valueList2.map(
-                      (value) {
+                          (value) {
                         return DropdownMenuItem(
                           value: value,
                           child: Text(value),
@@ -435,79 +465,80 @@ class _CreatePostPageState extends State<CreatePostPage> {
             ),
             ElevatedButton(
                 onPressed: _selectedValue == '카테고리' ||
-                        _selectedValue0 == '배송방법' ||
-                        _selectedValue1 == '배송속성' ||
-                        _selectedValue2 == '상품별 배송비' ||
-                        _selectedValue3 == '결제방식' ||
-                        story == "" ||
-                        postTitle == "" ||
-                        price == "" ||
-                        number == "" ||
-                        weight == "" ||
-                        wraptype == "" ||
-                        from == "" ||
-                        refund == ""
+                    _selectedValue0 == '배송방법' ||
+                    _selectedValue1 == '배송속성' ||
+                    _selectedValue2 == '상품별 배송비' ||
+                    _selectedValue3 == '결제방식' ||
+                    story == "" ||
+                    postTitle == "" ||
+                    price == "" ||
+                    number == "" ||
+                    weight == "" ||
+                    wraptype == "" ||
+                    from == "" ||
+                    refund == ""
                     ? null
                     : () {
-                        String url = "";
-                        if (_image != null) {
-                          url = _submit() as String;
-                        }
+                  String url = "";
+                  if (_image != null) {
+                    url = _submit() as String;
+                  }
 
-                        String postKey = getRandomString(16);
-                        _selectedValue == '채소'
-                            ? fireStore
-                                .collection('Posts')
-                                .doc(_selectedValue)
-                                .collection('posts')
-                                .doc(postKey)
-                                .set({
-                                "key": postKey,
-                                "title": postTitle,
-                                "price": price,
-                                "left": number,
-                                "weight": weight,
-                                "wraptype": wraptype,
-                                "wherefrom": from,
-                                "exchange": refund,
-                                "explain": story,
-                                "firstPicUrl": url,
-                                // "firstPicWidth": 0,
-                                // "firstPicHeight": 0,
-                                "authorName":
-                                    FirebaseAuth.instance.currentUser?.email,
-                                "like": "",
-                                'timeStamp': DateTime.now(),
-                              })
-                            : fireStore
-                                .collection('Posts')
-                                .doc(_selectedValue)
-                                .collection('postsa')
-                                .doc(postKey)
-                                .set({
-                                "key": postKey,
-                                "title": postTitle,
-                                "price": price,
-                                "left": number,
-                                "weight": weight,
-                                "wraptype": wraptype,
-                                "wherefrom": from,
-                                "exchange": refund,
-                                "explain": story,
-                                "firstPicUrl": "",
-                                // "firstPicWidth": 0,
-                                // "firstPicHeight": 0,
-                                "authorName":
-                                    FirebaseAuth.instance.currentUser?.email,
-                                "like": "",
-                                'timeStamp': DateTime.now(),
-                              });
-                        Get.back();
-                        // FirebaseFirestore
-                        // fireStore = FirebaseFirestore.instance;
-                      },
+                  String postKey = getRandomString(16);
+                  _selectedValue == '채소'
+                      ? fireStore
+                      .collection('Posts')
+                      .doc(_selectedValue)
+                      .collection('posts')
+                      .doc(postKey)
+                      .set({
+                    "key": postKey,
+                    "title": postTitle,
+                    "price": price,
+                    "left": number,
+                    "weight": weight,
+                    "wraptype": wraptype,
+                    "wherefrom": from,
+                    "exchange": refund,
+                    "explain": story,
+                    "firstPicUrl": url,
+                    // "firstPicWidth": 0,
+                    // "firstPicHeight": 0,
+                    "authorName":
+                    FirebaseAuth.instance.currentUser?.email,
+                    "like": "",
+                    'timeStamp': DateTime.now(),
+                  })
+                      : fireStore
+                      .collection('Posts')
+                      .doc(_selectedValue)
+                      .collection('postsa')
+                      .doc(postKey)
+                      .set({
+                    "key": postKey,
+                    "title": postTitle,
+                    "price": price,
+                    "left": number,
+                    "weight": weight,
+                    "wraptype": wraptype,
+                    "wherefrom": from,
+                    "exchange": refund,
+                    "explain": story,
+                    "firstPicUrl": "",
+                    // "firstPicWidth": 0,
+                    // "firstPicHeight": 0,
+                    "authorName":
+                    FirebaseAuth.instance.currentUser?.email,
+                    "like": "",
+                    'timeStamp': DateTime.now(),
+                  });
+                  Get.back();
+                  // FirebaseFirestore
+                  // fireStore = FirebaseFirestore.instance;
+                },
                 style: ElevatedButton.styleFrom(
-                    onSurface: Color.fromARGB(255, 63, 141, 180)),
+                    onSurface: Color.fromARGB(255, 158, 193, 81)),
+
                 child: Text("upload")),
           ]),
         ),
