@@ -231,8 +231,8 @@ class _OrderListPageState extends State<OrderListPage> {
                                   height: 100,
                                   child: AspectRatio(
                                     aspectRatio: 18 / 11,
-                                    child: Image.asset(
-                                        "assets/images/55205930.jpg"),
+                                    child: Image.network(snapshot
+                                        .data!.docs[index]['firstPicUrl']),
                                   ),
                                 ),
                               ),
