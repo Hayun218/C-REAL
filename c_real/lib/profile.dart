@@ -1,5 +1,11 @@
+
+import 'package:c_real/profile_farmer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'auth.dart';
 import 'consumer.dart';
+import 'create.dart';
+import 'order_list.dart';
 
 class MyProfile extends StatefulWidget {
   @override
@@ -7,6 +13,7 @@ class MyProfile extends StatefulWidget {
 }
 
 class _MyProfileState extends State<MyProfile> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,13 +84,43 @@ class _MyProfileState extends State<MyProfile> {
                         ),
                       ),
                     ),
+
+                   const SizedBox(width: 30),
+
+                   TextButton(
+                     onPressed: () => Navigator.push(
+                       context,
+                       MaterialPageRoute(
+                           builder: (context) => OrderListPage()),
+                     ),
+                     child: const Text("주문목록"),
+                   ),
+
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    const CircleAvatar(
+                      backgroundColor: Colors.black12,
+                      child: Center(
+                        child: Icon(
+                          Icons.shopping_bag,
+                          color: Colors.green,
+                          size: 20,
+                        ),
+                      ),
+                    ),
                     const SizedBox(width: 30),
                     TextButton(
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => OrderedCheck()),
-                      ),
-                      child: const Text("주문목록"),
+
+                      onPressed: () => null,
+                        //   Navigator.push(
+                        // context,
+                        // MaterialPageRoute(
+                        //     builder: (context) => QuestionPage()),),
+
+                      child: Text("취소/반품/교환목록"),
                     ),
                   ],
                 ),
@@ -102,14 +139,12 @@ class _MyProfileState extends State<MyProfile> {
                     ),
                     const SizedBox(width: 30),
                     TextButton(
-                      onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => QuestionPage()),
-                        // );
-                      },
-                      child: Text("취소/반품/교환목록"),
+                      onPressed: () => //null,
+                        Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => FarmerProfile()),),
+                      child: Text("결제수단"),
                     ),
                   ],
                 ),
@@ -140,7 +175,7 @@ class _MyProfileState extends State<MyProfile> {
                       backgroundColor: Colors.black12,
                       child: Center(
                         child: Icon(
-                          Icons.shopping_bag,
+                          Icons.clear,
                           color: Colors.green,
                           size: 20,
                         ),
@@ -148,52 +183,56 @@ class _MyProfileState extends State<MyProfile> {
                     ),
                     const SizedBox(width: 30),
                     TextButton(
-                      onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => QuestionPage()),
-                        // );
+
+                      onPressed: () async {
+                        if(FirebaseAuth.instance != null) {
+                          await FirebaseAuth.instance.signOut();
+                        }
+
+
                       },
                       child: Text("로그아웃"),
                     ),
+
                   ],
                 ),
                 SizedBox(height: 30),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black12,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  height: 70,
-                  child: Row(
-                    children: [
-                      SizedBox(width: 30),
-                      Icon(Icons.card_giftcard_outlined,
-                          color: Colors.lightGreen),
-                      SizedBox(width: 30),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            child: Text(
-                              "Invite your friends",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
-                            ),
-                          ),
-                          Container(
-                            child: Text(
-                              "And get a chance to win the giveaway",
-                              style:
-                                  TextStyle(color: Colors.green, fontSize: 10),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+
+
+// invite friends
+                // Container(
+                //   decoration: BoxDecoration(
+                //     color: Colors.black12,
+                //     borderRadius: BorderRadius.circular(5),
+                //   ),
+                //   height: 70,
+                //   child: Row(
+                //     children: [
+                //       SizedBox(width: 30),
+                //
+                //       Icon(Icons.card_giftcard_outlined,
+                //         color: Colors.lightGreen),
+                //       SizedBox(width: 30),
+                //       Column(
+                //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //         children: [
+                //         Container(
+                //           child: Text("Invite your friends",
+                //           style: TextStyle(fontWeight:FontWeight.bold, fontSize: 18),
+                //           ),
+                //         ),
+                //
+                //         Container(
+                //           child: Text("And get a chance to win the giveaway",
+                //             style: TextStyle(color: Colors.green, fontSize: 10),
+                //           ),
+                //         ),
+                //       ],
+                //       ),
+                //     ],
+                //   ),
+                // ),
+
               ],
             ),
           ],

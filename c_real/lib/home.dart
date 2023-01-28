@@ -10,6 +10,30 @@ import 'package:intl/intl.dart';
 
 int pageChanged = 0;
 
+
+
+class Customshape extends CustomClipper<Path>{
+  @override
+  Path getClip(Size size) {
+    double height = size.height;
+    double width = size.width;
+
+    var path = Path();
+    path.lineTo(0, height-50);
+    path.quadraticBezierTo(width/2, height, width, height-50);
+    path.lineTo(width, 0);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    // TODO: implement shouldReclip
+    return true;
+  }
+
+}
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
   @override
@@ -128,6 +152,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
             }
             return Container(
                 height: 400,
+
                 child: Scrollbar(
                     child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -317,9 +342,11 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
     final double itemHeight = size.height / 3;
     final double itemWidth = size.width / 2;
     return Scaffold(
+
         appBar: AppBar(
           toolbarHeight: size.height / 8,
           backgroundColor: Color(0xff9EC151),
+
           flexibleSpace: Container(
             child: Column(
               children: [
@@ -371,6 +398,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             fontWeight: FontWeight.w500),
                         filled: true,
                         fillColor: Colors.white),
+
                   ),
                 )
               ],
@@ -388,6 +416,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ],
           ),
         ),
+
         // appBar: AppBar(
         //   backgroundColor: Color(0xff9EC151),
         //   actions: [
@@ -434,6 +463,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
         //   ),
         // ),
         body: TabBarView(controller: _tabController, children: [
+
           Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,

@@ -50,7 +50,15 @@ dependencies:
   fluttertoast: ^8.1.2
   liquid_progress_indicator: ^0.4.0
   iamport_flutter: ^0.10.7
+
+  image_picker: ^0.8.6+1
+  dotted_border: ^2.0.0+3
+  dio: ^4.0.6
+
   intl: ^0.17.0
+  firebase_storage: ^11.0.10
+  flutter_rating_bar: ^4.0.1
+
 
 dev_dependencies:
   flutter_test:
@@ -94,6 +102,7 @@ flutter:
     - asset/하트4x.png
     - asset/하트회색4x.png
     - assets/images/Group151.png
+    - assets/images/myshop.png
 
 
   #   - images/a_dot_ham.jpeg
