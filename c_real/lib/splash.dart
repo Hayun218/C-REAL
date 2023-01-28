@@ -1,3 +1,5 @@
+import 'dart:async';
+
 
 import 'dart:async';
 
@@ -25,7 +27,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         body: Stack(
       alignment: Alignment.center,

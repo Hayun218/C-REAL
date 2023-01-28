@@ -38,16 +38,16 @@ class _FavoritePageState extends State<FavoritePage> {
               height: 400,
               child: Scrollbar(
                   child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: itemWidth / itemHeight,
-                    ),
-                    itemCount: snapshot.data?.docs.length,
-                    itemBuilder: ((context, index) => Container(
-                        padding:
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: itemWidth / itemHeight,
+                ),
+                itemCount: snapshot.data?.docs.length,
+                itemBuilder: ((context, index) => Container(
+                    padding:
                         const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-                        child: InkWell(
-                          onTap: () => Get.to(() => HomeDetailPage(
+                    child: InkWell(
+                      onTap: () => Get.to(() => HomeDetailPage(
                             pageInfo: "",
                             titleStr: snapshot.data!.docs[index]['title'],
                             explainStr: snapshot.data!.docs[index]['explain'],
@@ -61,47 +61,47 @@ class _FavoritePageState extends State<FavoritePage> {
                             where: snapshot.data!.docs[index]['wherefrom'],
                             wrap: snapshot.data!.docs[index]['wraptype'],
                           )),
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0)),
-                            clipBehavior: Clip.antiAlias,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Material(
-                                  color: Colors.transparent,
-                                  child: AspectRatio(
-                                    aspectRatio: 18.0 / 11.0,
-                                    child:
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0)),
+                        clipBehavior: Clip.antiAlias,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Material(
+                              color: Colors.transparent,
+                              child: AspectRatio(
+                                aspectRatio: 18.0 / 11.0,
+                                child:
                                     Image.asset("assets/images/55205930.jpg"),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      16.0, 12.0, 16.0, 8.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}kg",
-                                        style: NunitoProductTitle(),
-                                      ),
-                                      SizedBox(height: 4.0),
-                                      Text(
-                                          "${snapshot.data!.docs[index]['price']}원",
-                                          style: NunitoProductPrice()),
-                                      SizedBox(height: 4.0),
-                                      Text(
-                                          '1kg당 ${NumberFormat("###.#", "en_US").format(int.parse(snapshot.data!.docs[index]['price']) / int.parse(snapshot.data!.docs[index]['weight']))}원',
-                                          style: NunitoProductSmall()),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ))),
-                  )));
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                  16.0, 12.0, 16.0, 8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}kg",
+                                    style: NunitoProductTitle(),
+                                  ),
+                                  SizedBox(height: 4.0),
+                                  Text(
+                                      "${snapshot.data!.docs[index]['price']}원",
+                                      style: NunitoProductPrice()),
+                                  SizedBox(height: 4.0),
+                                  Text(
+                                      '1kg당 ${NumberFormat("###.#", "en_US").format(int.parse(snapshot.data!.docs[index]['price']) / int.parse(snapshot.data!.docs[index]['weight']))}원',
+                                      style: NunitoProductSmall()),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ))),
+              )));
         });
   }
 
@@ -134,8 +134,8 @@ class _FavoritePageState extends State<FavoritePage> {
   }
 }
 
-
 //////////////////////////////////////////////////////////////////////////////////
+
 class OrderedCheck extends StatefulWidget {
   @override
   _OrderedCheckState createState() => _OrderedCheckState();
@@ -241,99 +241,99 @@ class _OrderedCheckState extends State<OrderedCheck> {
           child: GridView.builder(
             itemCount: snapshot.data!.docs.length,
             itemBuilder: ((context, index) => Container(
-              padding:
-              const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-              child: InkWell(
-                onTap: () => Get.to(
+                  padding:
+                      const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+                  child: InkWell(
+                    onTap: () => Get.to(
                       () => HomeDetailPage(
-                    pageInfo: "",
-                    titleStr: snapshot.data!.docs[index]['title'],
-                    explainStr: snapshot.data!.docs[index]['explain'],
-                    imgURL: snapshot.data!.docs[index]['firstPicUrl'],
-                    keyValue: snapshot.data!.docs[index]['key'],
-                    heart: snapshot.data!.docs[index]['like'],
-                    exchange: snapshot.data!.docs[index]['exchange'],
-                    left: snapshot.data!.docs[index]['left'],
-                    price: snapshot.data!.docs[index]['price'],
-                    weight: snapshot.data!.docs[index]['weight'],
-                    where: snapshot.data!.docs[index]['wherefrom'],
-                    wrap: snapshot.data!.docs[index]['wraptype'],
-                  ),
-                ),
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0)),
-                  clipBehavior: Clip.antiAlias,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          children: [
-                            Icon(Icons.check),
-                            Padding(
-                                padding:
-                                EdgeInsets.symmetric(horizontal: 10)),
-                            Text("판매처명"),
-                          ],
-                        ),
+                        pageInfo: "",
+                        titleStr: snapshot.data!.docs[index]['title'],
+                        explainStr: snapshot.data!.docs[index]['explain'],
+                        imgURL: snapshot.data!.docs[index]['firstPicUrl'],
+                        keyValue: snapshot.data!.docs[index]['key'],
+                        heart: snapshot.data!.docs[index]['like'],
+                        exchange: snapshot.data!.docs[index]['exchange'],
+                        left: snapshot.data!.docs[index]['left'],
+                        price: snapshot.data!.docs[index]['price'],
+                        weight: snapshot.data!.docs[index]['weight'],
+                        where: snapshot.data!.docs[index]['wherefrom'],
+                        wrap: snapshot.data!.docs[index]['wraptype'],
                       ),
-                      Row(
-                        children: [
-                          Material(
-                            color: Colors.transparent,
-                            child: SizedBox(
-                              width: 100,
-                              height: 100,
-                              child: AspectRatio(
-                                aspectRatio: 18 / 11,
-                                child: Image.asset(
-                                    "assets/images/55205930.jpg"),
-                              ),
+                    ),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0)),
+                      clipBehavior: Clip.antiAlias,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Row(
+                              children: [
+                                Icon(Icons.check),
+                                Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10)),
+                                Text("판매처명"),
+                              ],
                             ),
                           ),
-                          Padding(
-                              padding:
-                              EdgeInsets.symmetric(horizontal: 10)),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              // Text(
-                              //   "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}Kg",
-                              //   style: NunitoProductTitle(),
-                              // ),
-                              // SizedBox(height: 4.0),
-                              // Text('${snapshot.data!.docs[index]['price']}원',
-                              //     style: NunitoProductPrice()),
-                              // SizedBox(height: 4.0),
-                              // Text(
-                              //     '1kg당 ${snapshot.data!.docs[index]['price'] / snapshot.data!.docs[index]['weight']}원',
-                              //     style: NunitoProductSmall()),
-                              // Text(
-                              //     '1kg당 ${snapshot.data!.docs[index]['price'] / snapshot.data!.docs[index]['weight']}원',
-                              //     style: NunitoProductSmall()),
-                              Text(
-                                "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}Kg",
-                                style: NunitoProductTitle(),
+                          Row(
+                            children: [
+                              Material(
+                                color: Colors.transparent,
+                                child: SizedBox(
+                                  width: 100,
+                                  height: 100,
+                                  child: AspectRatio(
+                                    aspectRatio: 18 / 11,
+                                    child: Image.asset(
+                                        "assets/images/55205930.jpg"),
+                                  ),
+                                ),
                               ),
-                              SizedBox(height: 4.0),
-                              Text(
-                                  '${snapshot.data!.docs[index]['price']}원',
-                                  style: NunitoProductPrice()),
-                              SizedBox(height: 4.0),
-                              Text(
-                                  '1kg당 ${NumberFormat("###.0#", "en_US").format(int.parse(snapshot.data!.docs[index]['price']) / int.parse(snapshot.data!.docs[index]['weight']))}원',
-                                  style: NunitoProductSmall()),
+                              Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10)),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  // Text(
+                                  //   "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}Kg",
+                                  //   style: NunitoProductTitle(),
+                                  // ),
+                                  // SizedBox(height: 4.0),
+                                  // Text('${snapshot.data!.docs[index]['price']}원',
+                                  //     style: NunitoProductPrice()),
+                                  // SizedBox(height: 4.0),
+                                  // Text(
+                                  //     '1kg당 ${snapshot.data!.docs[index]['price'] / snapshot.data!.docs[index]['weight']}원',
+                                  //     style: NunitoProductSmall()),
+                                  // Text(
+                                  //     '1kg당 ${snapshot.data!.docs[index]['price'] / snapshot.data!.docs[index]['weight']}원',
+                                  //     style: NunitoProductSmall()),
+                                  Text(
+                                    "${snapshot.data!.docs[index]['title']}, ${snapshot.data!.docs[index]['weight']}Kg",
+                                    style: NunitoProductTitle(),
+                                  ),
+                                  SizedBox(height: 4.0),
+                                  Text(
+                                      '${snapshot.data!.docs[index]['price']}원',
+                                      style: NunitoProductPrice()),
+                                  SizedBox(height: 4.0),
+                                  Text(
+                                      '1kg당 ${NumberFormat("###.0#", "en_US").format(int.parse(snapshot.data!.docs[index]['price']) / int.parse(snapshot.data!.docs[index]['weight']))}원',
+                                      style: NunitoProductSmall()),
+                                ],
+                              ),
                             ],
                           ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            )),
+                )),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 1,
               childAspectRatio: itemWidth / itemHeight,
@@ -390,94 +390,91 @@ class _OrderedCheckState extends State<OrderedCheck> {
       ),
       bottomNavigationBar: BottomAppBar(
           child: SizedBox(
-            height: size.height / 8,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  "총 33000원",
-                  style: NunitoProductPrice(),
-                ),
-                MaterialButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50.0)),
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            content: SizedBox(
-                              height: size.height / 4,
-                              child: Column(
-                                children: [
-                                  Image.asset("assets/images/image16.png"),
-                                  Text('일반 마트보다',
-                                      style: GoogleFonts.nunito(
-                                          fontSize: 25,
-                                          height: 30 / 25,
-                                          letterSpacing: 0,
-                                          fontWeight: FontWeight.w700)),
-                                  Text('총N원',
-                                      style: GoogleFonts.nunito(
-                                          color: Color(0xff9EC151),
-                                          fontSize: 25,
-                                          height: 30 / 25,
-                                          letterSpacing: 0,
-                                          fontWeight: FontWeight.w700)),
-                                  Text('더 저렴하게 구입해요',
-                                      style: GoogleFonts.nunito(
-                                          fontSize: 25,
-                                          height: 30 / 25,
-                                          letterSpacing: 0,
-                                          fontWeight: FontWeight.w700)),
-                                ],
+        height: size.height / 8,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            MaterialButton(
+              minWidth: 300,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0)),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: SizedBox(
+                          height: size.height / 4,
+                          child: Column(
+                            children: [
+                              Image.asset("assets/images/image16.png"),
+                              Text('일반 마트보다',
+                                  style: GoogleFonts.nunito(
+                                      fontSize: 25,
+                                      height: 30 / 25,
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.w700)),
+                              Text('총 12%',
+                                  style: GoogleFonts.nunito(
+                                      color: Color(0xff9EC151),
+                                      fontSize: 25,
+                                      height: 30 / 25,
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.w700)),
+                              Text('더 저렴하게 구입해요',
+                                  style: GoogleFonts.nunito(
+                                      fontSize: 25,
+                                      height: 30 / 25,
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.w700)),
+                            ],
+                          ),
+                        ),
+                        actions: <Widget>[
+                          MaterialButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0)),
+                            onPressed: (() {
+                              Navigator.of(context, rootNavigator: true)
+                                  .pop('dialog');
+                              Get.toNamed('/payment-test');
+                            }),
+                            color: Color(0xff9EC151),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text(
+                                "확인했어요",
+                                style: GoogleFonts.nunito(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    height: 25 / 20,
+                                    letterSpacing: 0,
+                                    fontWeight: FontWeight.w700),
                               ),
                             ),
-                            actions: <Widget>[
-                              MaterialButton(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.0)),
-                                onPressed: (() {
-                                  Navigator.of(context, rootNavigator: true)
-                                      .pop('dialog');
-                                  Get.toNamed('/payment-test');
-                                }),
-                                color: Color(0xff9EC151),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Text(
-                                    "확인했어요",
-                                    style: GoogleFonts.nunito(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        height: 25 / 20,
-                                        letterSpacing: 0,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                ),
-                              ),
-                            ],
-                            actionsAlignment: MainAxisAlignment.center,
-                          );
-                        });
-                  },
-                  color: Color(0xff9EC151),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      "구매하기 (${shoppingProductList.length})",
-                      style: GoogleFonts.nunito(
-                          color: Colors.white,
-                          fontSize: 20,
-                          height: 25 / 20,
-                          letterSpacing: 0,
-                          fontWeight: FontWeight.w700),
-                    ),
-                  ),
+                          ),
+                        ],
+                        actionsAlignment: MainAxisAlignment.center,
+                      );
+                    });
+              },
+              color: Color(0xff9EC151),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  "구매하러가기",
+                  style: GoogleFonts.nunito(
+                      color: Colors.white,
+                      fontSize: 20,
+                      height: 25 / 20,
+                      letterSpacing: 0,
+                      fontWeight: FontWeight.w700),
                 ),
-              ],
+              ),
             ),
-          )),
+          ],
+        ),
+      )),
     );
   }
 }
@@ -494,4 +491,5 @@ Future deleteData(String id) async {
     print('e');
     return false;
   }
+
 }
