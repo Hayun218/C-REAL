@@ -85,16 +85,16 @@ class _MyProfileState extends State<MyProfile> {
                       ),
                     ),
 
-                   const SizedBox(width: 30),
+                    const SizedBox(width: 30),
 
-                   TextButton(
-                     onPressed: () => Navigator.push(
-                       context,
-                       MaterialPageRoute(
-                           builder: (context) => OrderListPage()),
-                     ),
-                     child: const Text("주문목록"),
-                   ),
+                    TextButton(
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => OrderListPage()),
+                      ),
+                      child: const Text("주문목록"),
+                    ),
 
                   ],
                 ),
@@ -115,10 +115,10 @@ class _MyProfileState extends State<MyProfile> {
                     TextButton(
 
                       onPressed: () => null,
-                        //   Navigator.push(
-                        // context,
-                        // MaterialPageRoute(
-                        //     builder: (context) => QuestionPage()),),
+                      //   Navigator.push(
+                      // context,
+                      // MaterialPageRoute(
+                      //     builder: (context) => QuestionPage()),),
 
                       child: Text("취소/반품/교환목록"),
                     ),
@@ -140,10 +140,10 @@ class _MyProfileState extends State<MyProfile> {
                     const SizedBox(width: 30),
                     TextButton(
                       onPressed: () => //null,
-                        Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => FarmerProfile()),),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FarmerProfile()),),
                       child: Text("결제수단"),
                     ),
                   ],
@@ -249,7 +249,7 @@ class _MyProfileState extends State<MyProfile> {
           return AlertDialog(
             insetPadding: EdgeInsets.symmetric(vertical: 270),
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             title: const Text("고객센터"),
             content: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
