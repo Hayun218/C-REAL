@@ -82,7 +82,7 @@ class LikePageState extends State<LikePage> with TickerProviderStateMixin {
                                 child: AspectRatio(
                                   aspectRatio: 18.0 / 11.0,
                                   child:
-                                      Image.asset("assets/images/55205930.jpg"),
+                                      Image.network(snapshot.data!.docs[index]['firstPicUrl']),
                                 ),
                               ),
                               Padding(
