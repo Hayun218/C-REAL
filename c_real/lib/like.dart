@@ -36,7 +36,7 @@ class LikePageState extends State<LikePage> with TickerProviderStateMixin {
       child: StreamBuilder<QuerySnapshot>(
           // stream: FirebaseFirestore.instance.collectionGroup('Posts').orderBy('timeStamp', descending: true).snapshots(),
           stream: FirebaseFirestore.instance
-              .collectionGroup('posts')
+              .collectionGroup('store')
               .orderBy('timeStamp', descending: true)
               .snapshots(),
           builder: (context, snapshot) {
@@ -101,7 +101,7 @@ class LikePageState extends State<LikePage> with TickerProviderStateMixin {
                                         style: NunitoProductPrice()),
                                     SizedBox(height: 4.0),
                                     Text(
-                                        '1kg당 ${NumberFormat("###.#", "en_US").format(int.parse(snapshot.data!.docs[index]['price']) / int.parse(snapshot.data!.docs[index]['weight']))}원',
+                                        '1kg당 ${NumberFormat("###.#", "en_US").format(double.parse(snapshot.data!.docs[index]['price']) / double.parse(snapshot.data!.docs[index]['weight']))}원',
                                         style: NunitoProductSmall()),
                                   ],
                                 ),

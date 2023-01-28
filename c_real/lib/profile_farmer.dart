@@ -42,14 +42,14 @@ class _FarmerProfileState extends State<FarmerProfile> {
                   child: CircleAvatar(
                     radius: 60,
                     backgroundImage: NetworkImage(
-                      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*',
+                      'https://www.google.com/url?sa=i&url=https%3A%2F%2Felumome.pacosystem.es%2Fjumucez%2F&psig=AOvVaw08Gwy1w5KpH6QkQ-5vD8ME&ust=1674955601510000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKCPvv6N6fwCFQAAAAAdAAAAABAE',
                     ),
                   ),
                 ),
                 SizedBox(height: 280),
                 Container(
                   child: Text(
-                    "맛있는 홍시네",
+                    "밀양박씨 38대 박홍준",
                     style: TextStyle(
                       fontSize: 28,
                       color: Colors.black,
