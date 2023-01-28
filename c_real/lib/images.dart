@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -17,7 +15,6 @@ class UploadImage extends StatefulWidget {
 class _UploadImageState extends State<UploadImage> {
   File? _image;
   final picker = ImagePicker();
-
 
   Future getImage(ImageSource imageSource) async {
     final image = await picker.pickImage(source: imageSource);
@@ -51,42 +48,41 @@ class _UploadImageState extends State<UploadImage> {
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(height: 25.0),
+        showImage(),
+        const SizedBox(
+          height: 10.0,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            // 카메라 촬영 버튼
 
-    return
-Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 25.0),
-            showImage(),
-            const SizedBox(
-              height: 10.0,
+            FloatingActionButton(
+              heroTag: "Camera",
+              child: Icon(Icons.add_a_photo),
+              tooltip: 'pick Iamge',
+              onPressed: () {
+                getImage(ImageSource.camera);
+              },
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                // 카메라 촬영 버튼
 
-                FloatingActionButton(
-                  child: Icon(Icons.add_a_photo),
-                  tooltip: 'pick Iamge',
-                  onPressed: () {
-                    getImage(ImageSource.camera);
-                  },
-                ),
-
-
-                FloatingActionButton(
-                  child: Icon(Icons.wallpaper),
-                  tooltip: 'pick Iamge',
-                  onPressed: () {
-                    getImage(ImageSource.gallery);
-                  },
-                ),
-              ],
-            )
+            FloatingActionButton(
+              heroTag: "gallery",
+              child: Icon(Icons.wallpaper),
+              tooltip: 'pick Iamge',
+              onPressed: () {
+                getImage(ImageSource.gallery);
+              },
+            ),
           ],
-        );
-    if(_image != null){
+        )
+      ],
+    );
+    if (_image != null) {
       String imgURL = _submit() as String;
       print(imgURL);
     }
