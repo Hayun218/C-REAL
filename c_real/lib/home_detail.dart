@@ -138,7 +138,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                         "wraptype": widget.wrap,
                         "wherefrom": widget.where,
                         "exchange": widget.exchange,
-                        "firstPicUrl": "",
+                        "firstPicUrl": widget.imgURL,
                         // "firstPicWidth": 0,
                         // "firstPicHeight": 0,
                         "authorName": FirebaseAuth.instance.currentUser?.email,
