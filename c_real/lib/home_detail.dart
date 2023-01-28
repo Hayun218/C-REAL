@@ -36,7 +36,7 @@ class HomeDetailPage extends StatefulWidget {
       required this.weight,
       required this.where,
       required this.wrap,
-      this.imgURL = ''})
+        required this.imgURL,})
       : super(key: key);
   @override
   _HomeDetailPageState createState() => _HomeDetailPageState();
@@ -90,11 +90,18 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
           children: [
             SizedBox(
               height: 300.0,
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  child: Image.asset("assets/images/55205930.jpg"),
-                  borderRadius: BorderRadius.circular(16),
+
+              child: Hero(
+                tag: widget.price,
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    child: Container(
+                      child: Image.network(widget.imgURL),
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+
                 ),
               ),
             ),
